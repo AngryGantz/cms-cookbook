@@ -21,7 +21,14 @@
 		<header id="header" class="">
 			@include('header.header')
 		</header><!-- /header -->		
+
+
+
 		<section>
+
+            @include('errors.errmsg')
+
+        
 			@yield('body')
         	<p>Hello world! This is HTML5 Boilerplate.</p>
 
