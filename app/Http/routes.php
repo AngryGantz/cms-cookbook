@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+
+
+Route::get('/', 'HomeController@index');
+
+Route::get('/login', 'Sentinel\AuthController@login');
+Route::get('/register', 'Sentinel\AuthController@register');
