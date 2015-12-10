@@ -108,3 +108,14 @@ Route::post('reset/{id}/{code}', function($id, $code)
 		->withSuccess("Пароль сброшен.");
 })->where('id', '\d+');
 
+
+// Add post from front-end
+Route::get('/addpost', 'PostController@addpost');
+
+// Add post from front-end
+Route::post('/addpost', 'PostController@store');
+
+
+// Route::post('/addpost', function () {
+//   return dd(Input::all());
+// });

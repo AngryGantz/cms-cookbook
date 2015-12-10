@@ -143,6 +143,7 @@ return [
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
         SleepingOwl\Admin\AdminServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
 
         /*

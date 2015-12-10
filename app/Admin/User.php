@@ -5,11 +5,11 @@
  * For full list see documentation.
  */
 
-Admin::model('App\User')->title('Users')->display(function ()
+Admin::model('App\User')->title('Пользователи')->display(function ()
 {
 	$display = AdminDisplay::table();
 	$display->columns([
-		Column::string('name')->label('Name'),
+		Column::string('name')->label('Имя'),
 		Column::string('email')->label('Email'),
 	]);
 	return $display;
@@ -17,7 +17,7 @@ Admin::model('App\User')->title('Users')->display(function ()
 {
 	$form = AdminForm::form();
 	$form->items([
-		FormItem::text('name', 'Name')->required(),
+		FormItem::text('name', 'Имя')->required(),
 		FormItem::text('email', 'Email')->required()->unique(),
 	]);
 	return $form;
