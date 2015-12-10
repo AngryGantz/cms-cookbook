@@ -144,6 +144,7 @@ return [
         Illuminate\Html\HtmlServiceProvider::class,
         SleepingOwl\Admin\AdminServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
 
         /*
@@ -214,7 +215,8 @@ return [
         'AdminDisplay'  => SleepingOwl\Admin\Display\AdminDisplay::class,
         'AdminForm'     => SleepingOwl\Admin\Form\AdminForm::class,
         'AdminTemplate' => SleepingOwl\Admin\Templates\Facade\AdminTemplate::class,
-        'FormItem'      => SleepingOwl\Admin\FormItems\FormItem::class,        
+        'FormItem'      => SleepingOwl\Admin\FormItems\FormItem::class,
+        'Image'     => Intervention\Image\Facades\Image::class,
 
     ],
 

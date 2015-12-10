@@ -317,11 +317,11 @@
             '<div class="add-fields">' +
             '<div class="col-sm-2">' +
                 '<div class="upload">' +
-                    '<div class="file-preview"></div>' +
+                    '<div class="file-preview"><br>нажмите для загрузки изображения</div>' +
                     '<input type="file" name="imgstep[]" style="display: none;">' +
                 '</div>' +
             '</div>'+
-            ' <span class="handler-list"><i class="fa fa-arrows"></i></span>' +
+            //' <span class="handler-list"><i class="fa fa-arrows"></i></span>' +
             '<textarea class="short-text" name="steps[]" id="steps'+$numstep+'" cols="30" rows="10">    </textarea>' +
             ' <span class="del-list"><i class="fa fa-trash"></i></span>' +
             '</div>'+
