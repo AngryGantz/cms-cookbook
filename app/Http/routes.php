@@ -119,3 +119,25 @@ Route::post('/addpost', 'PostController@store');
 // Route::post('/addpost', function () {
 //   return dd(Input::all());
 // });
+
+
+Route::get('imager/{pathkey}/{filename}/{w?}/{h?}', function($pathkey, $filename, $w=150, $h=150){
+
+
+    $cacheimage = Image::cache(function($image) use($pathkey, $filename, $w, $h){
+
+        switch($pathkey){
+            case 'useruploads':
+                $filepath = 'public/images/useruploads/' . $filename;
+                break;
+            case 'fullpath':
+            	$filepath = 'images/useruploads/' . $filename;
+
+            	break;
+        }
+        return $image->make($filepath)->resize($w,$h);
+
+    }); 
+
+    return Response::make($cacheimage, 200, array('Content-Type' => 'image/jpeg'));
+});

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use File;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,6 +15,7 @@ use App\MarkerGroup;
 use App\MarkerCrossPost;
 use Image;
 use Sentinel;
+use Redirect;
 class PostController extends Controller
 {
     /**
@@ -49,6 +51,8 @@ class PostController extends Controller
     }
     /**
      * Store a newly created resource in storage.
+     * @todo Необходим рефракторинг по примеру @see adminStore
+     * @link adminStore
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -162,5 +166,94 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Store Post from admin panel.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function adminStore(Request $request, $id)
+    {
+
+        $fileArrNewImgFilesForSteps = $request->file('imgstep');
+        $strArrTextsForSteps =  $request->input('steps');
+        $strArrOldImgFileNamesForSteps = $request->input('imgnamestep');
+        $arrMarkersForPost = $request->input('markers');
+
+
+
+        $arrPrepareSteps = $this->makePrepareSteps($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps);
+
+        $post = Post::find($id);
+
+        // add field post from form
+        $post->user_id = Sentinel::check()->getUserId();;
+        $post->metakey = "";
+        $post->metadesc = "";
+        $post->title = $request->input('title');
+        $post->text = $request->input('text');
+        if (! is_null($request->input('note'))) $post->note = $request->input('note') ;
+        if (! is_null($request->input('calory'))) $post->calory = $request->input('calory') ;
+        if (! is_null($request->input('timecook'))) $post->timecook = $request->input('timecook') ;
+        if (! is_null($request->input('img'))) $post->img = $request->input('img');
+
+        $post->save(); // save post
+        $post->steps()->delete(); // delete old steps for this post
+        $post->steps()->saveMany($arrPrepareSteps); // save new steps for this post
+        $post->setMarkersAttribute($arrMarkersForPost);
+
+        // attach markers for post
+        // $selectmarkers = $request->input('recipe-type');
+        // foreach ($selectmarkers as $value) {
+        //     if ($value > 0) {
+        //         $post->markers()->attach($value);
+        //     }
+        // }
+        return Redirect::to('/admin/posts');
+    }
+
+    /**
+     * Fill array step images
+     * @param $strArrTextsForSteps  array of texts steps for recipie from post form
+     * @param $fileArrNewImgFilesForSteps array of new img files steps for recipie from post form
+     * @param $strArrOldImgFileNamesForSteps array of old img filenames steps for recipie from post form
+     * @return array steps for recipie (ready to save in table)
+     */
+    protected function makePrepareSteps($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps)
+    {
+        $i=0;
+        $steps = [];
+        foreach ($strArrTextsForSteps as $step) {
+            $imgpath = $strArrOldImgFileNamesForSteps[$i];
+            if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImage($fileArrNewImgFilesForSteps[$i]); }
+            $steps[] = new Step(['text' => $step, 'img' => $imgpath ]);
+            $i = $i+1;
+        }
+        return $steps;
+    }
+
+    /**
+     * If $imgfile exist in upload dir, return path to it.
+     * Else make resize to width 1000px, rename file to rnd string (32 simbols), save to
+     * 'images/useruploads/' dir and return path to it
+     * @param $imgfile File
+     * @return string path to img file
+     */
+    protected function saveImage($imgfile)
+    {
+        $rpath=$imgfile->getRealPath();
+        if (strpos($rpath, 'images') and file_exists($rpath)) {
+            return $rpath;
+        };
+        $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
+        $path = public_path('images/useruploads/' . $filename);
+        Image::make($imgfile->getRealPath())->resize(1000, null, function ($constraint)
+        {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        })->save($path,80);
+        return 'images/useruploads/' . $filename;
     }
 }

@@ -1,36 +1,58 @@
 <?php
-
-Admin::model('\App\Post')->title('Рецепты')->display(function ()
+use \App\Post;
+Admin::model('App\Post')->title('')->display(function ()
 {
 	$display = AdminDisplay::datatables();
-	$display->with('markers','steps', 'ingridients');
+	$display->with('steps', 'markers', 'user');
 	$display->filters([
 
 	]);
 	$display->columns([
 		Column::string('title')->label('Title'),
-		Column::string('note')->label('Note'),
-		Column::string('text')->label('Text'),
-		Column::string('img')->label('Img'),
-		Column::string('calory')->label('Calory'),
-		Column::string('timecook')->label('Timecook'),
-		Column::string('metakey')->label('Metakey'),
-		Column::string('metadesc')->label('Metadesc'),
+		// Column::string('note')->label('Note'),
 	]);
 	return $display;
 })->createAndEdit(function ()
 {
-	$form = AdminForm::form();
+
+	$form = AdminForm::tabbed();
+	$form->instance(['enctype' => 'multipart/form-data']);
 	$form->items([
-		FormItem::text('title', 'Title'),
-		FormItem::text('user_id', 'User'),
-		FormItem::text('img', 'Img'),
-		FormItem::text('timecook', 'Timecook'),
-		FormItem::text('calory', 'Calory'),
-		FormItem::text('metakey', 'Metakey'),
-		FormItem::text('metadesc', 'Metadesc'),
-		FormItem::ckeditor('note', 'Note'),
-		FormItem::ckeditor('text', 'Text'),
+			'Оcновные поля' => [
+					FormItem::columns()->columns([
+						[
+							FormItem::text('title', 'Заголовок'),
+							FormItem::select('user_id', 'Автор')->model('App\User')->display('first_name'),
+							FormItem::image('img', 'Изображение'),
+						],
+						[
+							FormItem::text('timecook', 'Время приготовления'),
+							FormItem::text('calory', 'Калории'),
+							FormItem::text('metakey', 'Metakey'),
+							FormItem::text('metadesc', 'Metadesc'),
+						],
+					]),
+						FormItem::multiselect('markers', 'Маркеры')->model('App\Marker')->display('name'),
+						FormItem::ckeditor('note', 'Ингридиенты'),
+						FormItem::ckeditor('text', 'Описание'),
+			],
+			'Этапы приготовления' => [
+
+					FormItem::custom()->display(function ($instance)
+					{
+						$steps = null;
+						if ( $instance->id ) {
+							$steps = Post::find($instance->id)->steps;
+						}
+					    return view('admin.steps', ['instance' => $instance, 'steps' => $steps]);
+					})->callback(function ($instance)
+					{
+					    $instance->myField = 12;
+					}),
+			],
 	]);
 	return $form;
 });
+
+
+

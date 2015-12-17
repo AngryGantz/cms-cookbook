@@ -5,7 +5,7 @@ return [
 	 * Admin title
 	 * Displays in page title and header
 	 */
-	'title'                   => 'Sleeping Owl administrator',
+	'title'                   => 'DP CookBook CMS',
 
 	/*
 	 * Admin url prefix
@@ -26,7 +26,7 @@ return [
 	/*
 	 * Directory to upload images to (relative to public directory)
 	 */
-	'imagesUploadDirectory' => 'images/uploads',
+	'imagesUploadDirectory' => 'images/useruploads',
 
 	/*
 	 * Authentication config
