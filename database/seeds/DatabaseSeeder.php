@@ -16,6 +16,25 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UserTableSeeder::class);
 
+        DB::table('users')->insert([
+            'first_name' => 'Администратор',
+            'email' => 'admin@localhost.loc',
+            'password' => bcrypt('adminadmin'),
+        ]);
+
+        DB::table('post_statuses')->insert([
+           [ 'name' => 'Неопубликован' ],
+           [ 'name' => 'На модерации' ],
+           [ 'name' => 'Опубликован' ],
+        ]);
+
+        DB::table('menuitem_types')->insert([
+            [ 'name' => 'Внутренняя ссылка' ],
+            [ 'name' => 'Внешняя ссылка' ],
+            [ 'name' => 'Маркер' ],
+            [ 'name' => 'Группа маркеров' ],
+        ]);
+
         Model::reguard();
     }
 }

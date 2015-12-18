@@ -9,4 +9,4 @@ Route::get('', [
 	}
 ]);
 
-Route::post('/posts/{id}', '\App\Http\Controllers\PostController@adminStore');
+Route::post('/posts/{id?}', '\App\Http\Controllers\PostController@adminStore');

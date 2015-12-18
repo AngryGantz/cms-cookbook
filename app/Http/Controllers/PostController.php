@@ -174,43 +174,41 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function adminStore(Request $request, $id)
+    public function adminStore(Request $request, $id=0)
     {
-
+        $request->flash();
+        $this->validate($request, [
+            'postStatus_id' => 'required',
+            'title' => 'required',
+            'user_id' => 'required',
+            'text' => 'required',
+        ]);
         $fileArrNewImgFilesForSteps = $request->file('imgstep');
         $strArrTextsForSteps =  $request->input('steps');
         $strArrOldImgFileNamesForSteps = $request->input('imgnamestep');
         $arrMarkersForPost = $request->input('markers');
 
-
-
         $arrPrepareSteps = $this->makePrepareSteps($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps);
 
-        $post = Post::find($id);
+        if ($id == 0 ) { $post = new Post; }
+        else { $post = Post::find($id); }
 
-        // add field post from form
-        $post->user_id = Sentinel::check()->getUserId();;
-        $post->metakey = "";
-        $post->metadesc = "";
+        $post->user_id = $request->input('user_id');
         $post->title = $request->input('title');
         $post->text = $request->input('text');
+        $post->postStatus_id = $request->input('postStatus_id');
         if (! is_null($request->input('note'))) $post->note = $request->input('note') ;
         if (! is_null($request->input('calory'))) $post->calory = $request->input('calory') ;
         if (! is_null($request->input('timecook'))) $post->timecook = $request->input('timecook') ;
         if (! is_null($request->input('img'))) $post->img = $request->input('img');
+        if (! is_null($request->input('metakey'))) $post->metakey = $request->input('metakey');
+        if (! is_null($request->input('metadesc'))) $post->metadesc = $request->input('metadesc');
 
         $post->save(); // save post
         $post->steps()->delete(); // delete old steps for this post
         $post->steps()->saveMany($arrPrepareSteps); // save new steps for this post
         $post->setMarkersAttribute($arrMarkersForPost);
 
-        // attach markers for post
-        // $selectmarkers = $request->input('recipe-type');
-        // foreach ($selectmarkers as $value) {
-        //     if ($value > 0) {
-        //         $post->markers()->attach($value);
-        //     }
-        // }
         return Redirect::to('/admin/posts');
     }
 
@@ -225,8 +223,10 @@ class PostController extends Controller
     {
         $i=0;
         $steps = [];
+//        dd($strArrOldImgFileNamesForSteps);
         foreach ($strArrTextsForSteps as $step) {
-            $imgpath = $strArrOldImgFileNamesForSteps[$i];
+            $imgpath = '';
+            if (isset($strArrOldImgFileNamesForSteps[$i])) $imgpath = $strArrOldImgFileNamesForSteps[$i];
             if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImage($fileArrNewImgFilesForSteps[$i]); }
             $steps[] = new Step(['text' => $step, 'img' => $imgpath ]);
             $i = $i+1;

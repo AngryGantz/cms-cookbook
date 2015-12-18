@@ -39,8 +39,8 @@
                     reader.onload = (function(theFile) {
                         return function(e) {
                             var image = e.target.result;
-                            previewDiv = $('.file-preview', elem.parent());
-                            bgWidth = previewDiv.width() * 2;
+                            var previewDiv = $('.file-preview', elem.parent());
+                            var bgWidth = previewDiv.width() * 2;
                             previewDiv.css({
                                 "background-size":bgWidth + "px, auto",
                                 "background-position":"50%, 50%",
@@ -59,6 +59,7 @@
 $( document ).ready(function() {
     $(".file-preview").on('click', function(){
         $(this).siblings('input[type=file]').trigger('click');
+        console.log('ssssssssssssss');
     });
 
     $('input[type=file]').on('change' ,function(e) {
@@ -75,8 +76,8 @@ $( document ).ready(function() {
                 reader.onload = (function(theFile) {
                     return function(e) {
                         var image = e.target.result;
-                        previewDiv = $('.file-preview', elem.parent());
-                        bgWidth = previewDiv.width() * 2;
+                        var previewDiv = $('.file-preview', elem.parent());
+                        var bgWidth = previewDiv.width() * 2;
                         previewDiv.html("");
                         previewDiv.css({
                             "background-size":bgWidth + "px, auto",

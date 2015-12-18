@@ -140,6 +140,7 @@ return [
         /*
          * Composer packages Service Providers...
          */
+        Barryvdh\Debugbar\ServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
         SleepingOwl\Admin\AdminServiceProvider::class,
@@ -217,6 +218,7 @@ return [
         'AdminTemplate' => SleepingOwl\Admin\Templates\Facade\AdminTemplate::class,
         'FormItem'      => SleepingOwl\Admin\FormItems\FormItem::class,
         'Image'     => Intervention\Image\Facades\Image::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

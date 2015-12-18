@@ -360,8 +360,8 @@
                     reader.onload = (function(theFile) {
                         return function(e) {
                             var image = e.target.result;
-                            previewDiv = $('.file-preview', elem.parent());
-                            bgWidth = previewDiv.width() * 2;
+                            var previewDiv = $('.file-preview', elem.parent());
+                            var bgWidth = previewDiv.width() * 2;
                             previewDiv.css({
                                 "background-size":bgWidth + "px, auto",
                                 "background-position":"50%, 50%",
