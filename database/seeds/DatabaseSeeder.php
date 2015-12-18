@@ -35,6 +35,24 @@ class DatabaseSeeder extends Seeder
             [ 'name' => 'Группа маркеров' ],
         ]);
 
+
+        Administrator::truncate();
+
+        $default = [
+            'username' => 'admin',
+            'password' => 'adminadmin',
+            'name'     => 'Администратор'
+        ];
+
+        try
+        {
+            Administrator::create($default);
+        } catch (\Exception $e)
+        {
+        }
+
+
+
         Model::reguard();
     }
 }
