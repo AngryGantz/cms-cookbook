@@ -10,7 +10,7 @@ Admin::model('App\User')->title('Пользователи')->display(function ()
 	$display = AdminDisplay::table();
 	$display->columns([
 		Column::string('first_name')->label('Имя'),
-		Column::string('last_name')->label('Имя'),
+		Column::string('last_name')->label('Фамилия'),
 		Column::string('email')->label('Email'),
 	]);
 	return $display;
