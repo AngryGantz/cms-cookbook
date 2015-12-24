@@ -24,7 +24,8 @@ Admin::model('App\Post')->title('')->display(function ()
 					FormItem::columns()->columns([
 						[
 							FormItem::text('title', 'Заголовок'),
-							FormItem::select('user_id', 'Автор')->model('App\User')->display('first_name')->defaultValue(Sentinel::check()->getUserId()),
+//							FormItem::select('user_id', 'Автор')->model('App\User')->display('first_name')->defaultValue(Sentinel::check()->getUserId()),
+							FormItem::select('user_id', 'Автор')->model('App\User')->display('first_name')->defaultValue(1),
 							FormItem::image('img', 'Изображение'),
 							FormItem::select('postStatus_id', 'Статус')->model('App\Models\PostStatus')->display('name')->defaultValue(1),
 						],

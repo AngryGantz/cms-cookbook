@@ -305,7 +305,6 @@
         $( '.list-sortable.ingredients-list').append( newMajesticItem );
         $( '.list-sortable.ingredients-list').children("li").slideDown();
         bindMajesticItem();
-
         event.preventDefault();
     });
 
@@ -331,6 +330,7 @@
         $( '.list-sortable.steps').append( newMajesticItem);
         $('.list-sortable.steps').children("li").slideDown();
         bindMajesticItem();
+        $('textarea').ckeditor();
         $numstep = $numstep +1;
     });
 

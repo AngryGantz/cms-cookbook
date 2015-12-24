@@ -19,4 +19,11 @@ Admin::model(\App\Models\PostStatus::class)->title('Статусы постов'
 		FormItem::text('name', 'Название Статуса'),
 	]);
 	return $form;
+})->delete(function ($id)
+{
+	if (in_array($id, [1,2,3]))
+	{
+		return null;
+	}
+	else { return 1;}
 });

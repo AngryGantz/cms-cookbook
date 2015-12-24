@@ -108,6 +108,38 @@ Route::post('reset/{id}/{code}', function($id, $code)
 		->withSuccess("Пароль сброшен.");
 })->where('id', '\d+');
 
+Route::get('reactivate', function()
+{
+	if ( ! $user = Sentinel::check())
+	{
+		return Redirect::to('login');
+	}
+
+	$activation = Activation::exists($user) ?: Activation::create($user);
+
+	// This is used for the demo, usually you would want
+	// to activate the account through the link you
+	// receive in the activation email
+	Activation::complete($user, $activation->code);
+
+	// $code = $activation->code;
+
+	// $sent = Mail::send('sentinel.emails.activate', compact('user', 'code'), function($m) use ($user)
+	// {
+	// 	$m->to($user->email)->subject('Activate Your Account');
+	// });
+
+	// if ($sent === 0)
+	// {
+	// 	return Redirect::to('register')
+	// 		->withErrors('Failed to send activation email.');
+	// }
+
+	return Redirect::to('account')
+			->withSuccess('Account activated.');
+})->where('id', '\d+');
+
+
 
 // Add post from front-end
 Route::get('/addpost', 'PostController@addpost');
@@ -125,19 +157,41 @@ Route::get('imager/{pathkey}/{filename}/{w?}/{h?}', function($pathkey, $filename
 
 
     $cacheimage = Image::cache(function($image) use($pathkey, $filename, $w, $h){
-
         switch($pathkey){
             case 'useruploads':
                 $filepath = 'public/images/useruploads/' . $filename;
                 break;
             case 'fullpath':
             	$filepath = 'images/useruploads/' . $filename;
-
             	break;
         }
-        return $image->make($filepath)->resize($w,$h);
-
-    }); 
+		if ($h < 10000) {
+			return $image->make($filepath)->resize($w, $h);
+		} else {
+			return $image->make($filepath)->resize($w, null, function ($constraint)
+			{
+				$constraint->aspectRatio();
+				$constraint->upsize();
+			});
+		}
+    });
 
     return Response::make($cacheimage, 200, array('Content-Type' => 'image/jpeg'));
 });
+
+// Show one recipie
+Route::get('/recipie/{id}', 'HomeController@showRecipie');
+
+// show users profile
+Route::get('/user/{id}', 'UserController@show');
+Route::post('/user/{id}', 'UserController@update');
+
+Route::get('/setratingpost/{rate}/{id}', 'PostController@setRating');
+
+Route::post('/addcomment/{id}', 'PostController@addComment');
+
+Route::get('/menu/{id}', 'PostController@showRecipiesByMarker');
+
+Route::post('subsnews', 'HomeController@subscribeNews');
+
+Route::post('/filter', 'HomeController@filterRecipies');

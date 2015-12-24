@@ -36,21 +36,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Administrator::truncate();
+        DB::table('administrators')->insert([
 
-        $default = [
             'username' => 'admin',
-            'password' => 'adminadmin',
+        	'password' => bcrypt('adminadmin'),
             'name'     => 'Администратор'
-        ];
-
-        try
-        {
-            Administrator::create($default);
-        } catch (\Exception $e)
-        {
-        }
-
+        ]);
 
 
         Model::reguard();

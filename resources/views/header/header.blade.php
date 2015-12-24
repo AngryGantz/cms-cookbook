@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="logo-wrapper">
-                            <a href="#"><img src="assets/majestic/images/logo.png" alt="logo"/></a>
+                            <a href="/"><img src="/assets/majestic/images/logo.png" alt="logo"/></a>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -34,7 +34,7 @@
 		                                        <a class="register" href="{{ URL::to('register') }}">Регистрация</a>
 											@else 	                                        
 		                                        <a class="login" href="{{ URL::to('logout') }}">Выход</a>
-		                                        <a class="register" href="#">Кабинет</a>
+		                                        <a class="register" href="/user/{{Sentinel::check()->id}}">Кабинет</a>
 											@endif
 	                                    </span>
                                     </div>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="banner-header">
                                 <a href="#">
-                                    <img src="assets/majestic/images/temp-images/header-banner.jpg" alt="banner"/>
+                                    <img src="/assets/majestic/images/temp-images/header-banner.jpg" alt="banner"/>
                                 </a>
                             </div>
                         </div>
@@ -57,37 +57,14 @@
             <div class="container">
                 <nav class="responsive-menu">
                     <ul>
-                        <li><a href="index.html">Home</a>
-                            <ul>
-                                <li><a href="variation1.html">variation one</a></li>
-                                <li><a href="variation2.html">variation two</a></li>
-                                <li><a href="variation3.html">variation three</a></li>
-                                <li><a href="variation4.html">variation four</a></li>
-                                <li><a href="variation5.html">variation five</a></li>
-                                <li><a href="variation6.html">variation six</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="recipe-listing.html">Recent Recipes</a>
-                            <ul>
-                                <li><a href="recipe-listing.html">recipe listing list view</a></li>
-                                <li><a href="recipe-listing-grid.html">recipe listing grid view</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="recipe-listing.html">Recipe Detail</a>
-                            <ul>
-                                <li><a href="recipe-detail.html">Recipe detail version 1</a></li>
-                                <li><a href="recipe-detail2.html">Recipe detail version 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="our-chefs.html">Chefs</a></li>
+                        @include('widgets.menu_group_markers_list', ['groupid' => 1])
+                        @include('widgets.menu_group_markers_list', ['groupid' => 2])
+                        @include('widgets.menu_group_markers_list', ['groupid' => 3])
                         <li><a href="blog.html">Blog</a>
                             <ul>
                                 <li><a href="single.html">Single post</a></li>
                             </ul>
                         </li>
-                        <li><a href="elements.html">Elements</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li class="submit-recipe"><a href="{{ URL::to('addpost') }}">Добавить рецепт</a></li>
                     </ul>

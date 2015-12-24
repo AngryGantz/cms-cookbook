@@ -4742,7 +4742,7 @@ div.widget-measurements .default-btn {
 }
 .ingredients-checkbox .ingredients {
   padding: 0 25px;
-  width: 58%;
+  width: 100%;
   background-image: url("../images/bg-ingredients.png");
   background-repeat: no-repeat;
   background-position: right bottom;
@@ -4891,12 +4891,29 @@ div.widget-measurements .default-btn {
   margin-top: 7px;
 }
 .tags-icons .details-social-icons ul:before {
-  content: "Share : ";
+  content: "Поделиться : ";
   font-size: 16px;
   font-family: 'Lora', serif;
   font-style: italic;
   font-weight: 400;
 }
+.tags-icons .details-social-icons .ulsocial_profile:before {
+  content: "В социальных сетях : ";
+  font-size: 16px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.profile .lbl {
+  font-size: 16px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+
+
 .tags-icons .details-social-icons li {
   margin-left: 12px;
 }

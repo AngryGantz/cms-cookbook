@@ -14,6 +14,7 @@ use Sentinel;
 use Activation;
 use Mail;
 use Reminder;
+use App\User;
 
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
@@ -64,9 +65,26 @@ class AuthController extends BaseController {
 		}
 		catch (NotActivatedException $e)
 		{
-			$errors = 'Ваш аккаунт не ативирован! Поищите в своем почтовом ящике письмо со ссылкой для активации.';
 
-			return Redirect::to('reactivate')->with('user', $e->getUser());
+
+			$user = User::where('email', '=', $input['email'] )->firstOrFail();
+			$user = Sentinel::findById($user->id);
+			$activation = Activation::create($user);
+			$code = $activation->code;
+			$sent = Mail::send('auth.email.activate', compact('user', 'code'), function($m) use ($user)
+			{
+				$m->from('hello@app.com', 'LaravelTest');
+				$m->to($user->email)->subject('Активация аккаунта');
+			});
+
+			if ($sent === 0)
+			{
+				return Redirect::to('register')
+						->withErrors('Ошибка отправки письма активации.');
+			}
+			$errors = 'Ваш аккаунт не ативирован! Поищите в своем почтовом ящике письмо со ссылкой для активации (Вам отправлено повторное письмо). ';
+			return view('auth.wait')->withErrors($errors);
+
 		}
 		catch (ThrottlingException $e)
 		{

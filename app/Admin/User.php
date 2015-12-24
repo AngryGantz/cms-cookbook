@@ -21,4 +21,11 @@ Admin::model('App\User')->title('Пользователи')->display(function ()
 		FormItem::text('email', 'Email')->required()->unique(),
 	]);
 	return $form;
+})->delete(function ($id)
+{
+	if (in_array($id, [1]))
+	{
+		return null;
+	}
+	else { return 1;}
 });

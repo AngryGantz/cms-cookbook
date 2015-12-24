@@ -1,5 +1,5 @@
-@extends('template')
-@section('body')
-	<h1>Это страница логина</h1>
+@extends('layouts.inner')
+@section('inner')
+	<h2>Авторизация</h2>
 	@include('auth._loginForm')
 @stop	

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use File;
 use Illuminate\Http\Request;
-
+use willvincent\Rateable\Rating;
+use Lanz\Commentable\Comment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Input;
 use App\Post;
+use App\User;
 use App\Step;
 use App\Marker;
 use App\MarkerGroup;
@@ -47,7 +49,7 @@ class PostController extends Controller
     {
         // $mgroups = new MarkerGroup;
         $mgroups = MarkerGroup::all();
-        return view('post.addpost', ['mgroups' => $mgroups]);
+        return view('addpost', ['mgroups' => $mgroups]);
     }
     /**
      * Store a newly created resource in storage.
@@ -59,68 +61,42 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // Save images from steps to public images dir and make array of path
-        $stepimagepath = []; //blank array for steps images path
-        if ($stepimages = $request->file('imgstep'))
-        {
-            foreach ($stepimages as $stepimage)
-            {
-                if (! is_null($stepimage))
-                {
-                    $filename  = str_random(32) . '.' . $stepimage->getClientOriginalExtension();
-                    $path = public_path('images/useruploads/' . $filename);
-                    Image::make($stepimage->getRealPath())->resize(1000, null, function ($constraint)
-                        {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                        })->save($path,80);
-                    $stepimagepath[] = 'images/useruploads/' . $filename;
-                } else {
-                    $stepimagepath[] = '';
-                }
-            }
-        }
-        $post = new Post; // new recipie object
-        // fill array steps cooking
-        $steps = [];
-        if ($stepsarray =  $request->input('steps'))
-        {
-            $i =0;
-            foreach ($stepsarray as $step) {
-                 $steps[] = new Step(['text' => $step, 'img' => $stepimagepath[$i] ]) ;
-                $i = $i+1;
-            }
-        }
-        // add field post from form
-        $post->user_id = Sentinel::check()->getUserId();;
-        $post->metakey = "";
-        $post->metadesc = "";
+
+        $request->flash();
+        $this->validate($request, [
+            'title' => 'required',
+            'text' => 'required',
+        ]);
+        $fileArrNewImgFilesForSteps = $request->file('imgstep');
+        $strArrTextsForSteps =  $request->input('steps');
+        $strArrOldImgFileNamesForSteps = $request->input('imgnamestep');
+        $arrMarkersForPost = $request->input('recipe-type');
+
+        $arrPrepareSteps = $this->makePrepareSteps($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps);
+
+        $post = new Post;
+        $post->user_id = Sentinel::check()->getUserId();
         $post->title = $request->input('title');
         $post->text = $request->input('text');
+        $post->postStatus_id = 2;
         if (! is_null($request->input('note'))) $post->note = $request->input('note') ;
         if (! is_null($request->input('calory'))) $post->calory = $request->input('calory') ;
         if (! is_null($request->input('timecook'))) $post->timecook = $request->input('timecook') ;
-        if (! is_null($request->input('imgpost'))) {
-            $filename  = str_random(32) . '.' . $stepimage->getClientOriginalExtension();
-            $path = public_path('images/useruploads/' . $filename);
-            Image::make($stepimage->getRealPath())->resize(1000, null, function ($constraint)
-            {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path,80);
-            $post->img = 'images/useruploads/' . $filename; ;
-        }
-        $post->save(); // save post
-        $post->steps()->saveMany($steps); // save steps for post
+        $post->metakey = "";
+        $post->metadesc = "";
+        if (! is_null($request->file('imgpost'))) $post->img = $this->saveImage($request->file('imgpost'));
 
+        $post->save(); // save post
+        $post->steps()->saveMany($arrPrepareSteps); // save new steps for this post
+        $post->setMarkersAttribute($arrMarkersForPost);
         // attach markers for post
-        $selectmarkers = $request->input('recipe-type');
-        foreach ($selectmarkers as $value) {
-            if ($value > 0) {
-                $post->markers()->attach($value);
-            }
-        }
-        return view('post.thanks');
+//                    $selectmarkers = $request->input('recipe-type');
+//                    foreach ($selectmarkers as $value) {
+//                        if ($value > 0) {
+//                            $post->markers()->attach($value);
+//                        }
+//                    }
+        return view('recipie.thanks');
     }
 
     /**
@@ -256,4 +232,95 @@ class PostController extends Controller
         })->save($path,80);
         return 'images/useruploads/' . $filename;
     }
+
+    /**
+     * Ajax request to setRating recipie
+     *
+     * @param $rate
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function setRating($rate, $id)
+    {
+        $post = Post::find($id);
+        $rating = new Rating;
+        $rating->rating = $rate;
+        if ( Sentinel::check() )
+        {
+            $rating->user_id = Sentinel::check()->id;
+            $post->ratings()->save($rating);
+            return response()->json(['response' => 'Спасибо за ваш голос']);
+        } else {
+            return response()->json(['response' => 'Извините, гости голосовать не могут']);
+        }
+    }
+
+    /**
+     * Ajax request to add new comment
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addComment(Request $request, $id)
+    {
+        if ( Sentinel::check() )
+        {
+            $post = Post::find($id);
+            $comment = new Comment;
+            $comment->body = $request->newcomment;
+            $user = User::find(Sentinel::check()->id);
+            $comment->user_id = $user->id;
+            $post->comments()->save($comment);
+            $ajaxresponse = [
+                'thanx'     => 'Спасибо за ваш комментарий',
+                'userid'    => $user->id,
+                'username'  => $user->first_name,
+                'useravatar'=> basename($user->avatar),
+                'newcomment'=> $request->newcomment,
+                'datetime'  => $comment->created_at->format('d.m.Y - H:i') ,
+                'guest'     => '0'
+            ];
+
+            return response()->json($ajaxresponse);
+        } else {
+            $ajaxresponse = [
+                'thanx' => 'Извините, гости оставлять комментарии не могут',
+                'guest' => '1'
+            ];
+            return response()->json($ajaxresponse);
+        }
+    }
+
+    /**
+     * Show all recipies with Marker $id
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showRecipiesByMarker($id) {
+        $marker = Marker::find($id);
+        $recipies = $marker->recipies;
+        return view('recipieGrid', ['recipies' => $recipies, 'title' => $marker->name]);
+    }
+
+    public function subscribeNews()
+    {
+        dd('sdsdsd');
+        return 'sdfsdf';
+        return response()->json(['response' => 'Спасибо за подписку', 'guest' => '0']);
+//
+//        $email = $request->email;
+//
+//        $sent = Mail::send('auth.email.subscribenotif', compact('user', 'code'), function($m) use ($email)
+//        {
+//            $m->from('hello@app.com', 'DP CookBook');
+//            $m->to('dimkin.pivovarov@gmail.com')->subject('Подписка на новости с DP CookBook');
+//        });
+//
+//        return response()->json(['response' => 'Спасибо за подписку', 'guest' => '0']);
+    }
+
+
+
 }

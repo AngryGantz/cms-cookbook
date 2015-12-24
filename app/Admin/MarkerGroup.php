@@ -11,10 +11,7 @@ Admin::model('App\MarkerGroup')->title('Группы маркеров')->display
 
 	$display->columns([
 		Column::string('name')->label('Имя'),
-		Column::string('longname')->label('Длинное имя'),
-		Column::image('ico')->label('Иконка'),
-		Column::string('metakey')->label('Meta Keywords'),
-		Column::string('metadesk')->label('Meta Description'),
+		Column::string('id')->label('ID'),
 		Column::lists('markers.name')->label('Маркеры'),
 	]);
 	return $display;

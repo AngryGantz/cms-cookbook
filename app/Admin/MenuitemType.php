@@ -20,4 +20,11 @@ Admin::model(\App\Models\MenuitemType::class)->title('Типы пунктов м
 		FormItem::text('name', 'Название типа'),
 	]);
 	return $form;
+})->delete(function ($id)
+{
+	if (in_array($id, [1,2,3,4]))
+	{
+		return null;
+	}
+	else { return 1;}
 });

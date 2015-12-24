@@ -59,7 +59,6 @@
 $( document ).ready(function() {
     $(".file-preview").on('click', function(){
         $(this).siblings('input[type=file]').trigger('click');
-        console.log('ssssssssssssss');
     });
 
     $('input[type=file]').on('change' ,function(e) {

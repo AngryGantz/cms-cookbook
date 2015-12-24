@@ -146,7 +146,10 @@ return [
         SleepingOwl\Admin\AdminServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
+        willvincent\Rateable\RateableServiceProvider::class,
+        Pingpong\Generators\GeneratorsServiceProvider::class,
+        Lanz\Commentable\CommentableServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
 
         /*
          * Application Service Providers...
