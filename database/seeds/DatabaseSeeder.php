@@ -43,6 +43,12 @@ class DatabaseSeeder extends Seeder
             'name'     => 'Администратор'
         ]);
 
+        DB::table('marker_groups')->insert([
+
+            [ 'name' => 'Кухня' ],
+            [ 'name' => 'Блюдо' ],
+            [ 'name' => 'Дневной рацион' ],
+        ]);
 
         Model::reguard();
     }
