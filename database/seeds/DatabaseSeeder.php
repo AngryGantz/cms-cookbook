@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        $this->call(BaseData::class);
+        $this->call(BaseData::class);
         $this->call(CmsOptionsSeeder::class);
     }
 }
