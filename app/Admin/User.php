@@ -9,7 +9,8 @@ Admin::model('App\User')->title('Пользователи')->display(function ()
 {
 	$display = AdminDisplay::table();
 	$display->columns([
-		Column::string('name')->label('Имя'),
+		Column::string('first_name')->label('Имя'),
+		Column::string('last_name')->label('Имя'),
 		Column::string('email')->label('Email'),
 	]);
 	return $display;
@@ -17,7 +18,9 @@ Admin::model('App\User')->title('Пользователи')->display(function ()
 {
 	$form = AdminForm::form();
 	$form->items([
-		FormItem::text('name', 'Имя')->required(),
+		FormItem::text('first_name', 'Имя')->required(),
+		FormItem::text('last_name', 'Фамилия')->required(),
+		FormItem::textarea('about', 'О Себе')->required(),
 		FormItem::text('email', 'Email')->required()->unique(),
 	]);
 	return $form;
