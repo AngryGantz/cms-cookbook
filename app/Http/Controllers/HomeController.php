@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Post;
-use Input;
+use App\Models\CmsOption;
 use Mail;
 use Session;
+
 
 class HomeController extends BaseController
 {
@@ -21,7 +21,8 @@ class HomeController extends BaseController
     {
        $recipies = Post::all();
        Session::put('recipies', $recipies);
-       return view('home', [ 'recipies' => $recipies ]);
+       $title = CmsOption::getValue('Название сайта');
+       return view('home', [ 'recipies' => $recipies, 'title' => $title ]);
     }
 
     /**
@@ -95,7 +96,9 @@ class HomeController extends BaseController
         $recipie = Post::find($id);
         $recipie->views = $recipie->views +1;
         $recipie->save();
-        return view('recipieSingle', [ 'recipie' => $recipie]);
+        $title = CmsOption::getValue('Название сайта');
+        $metaOptions = ['recipie' => $recipie];
+        return view('recipieSingle', [ 'recipie' => $recipie, 'title' => $title, 'metaOptions' => $metaOptions ]);
 
     }
 
@@ -132,6 +135,9 @@ class HomeController extends BaseController
             }
         }
         Session::put('recipies', $recipies);
-        return view('home', [ 'recipies' => $recipies ]);
+        $title = CmsOption::getValue('Название сайта');
+        $metaOptions = ['filter' => $request->filtergroup];
+//        dd($metaOptions['filter'][0]);
+        return view('recipieGrid', [ 'recipies' => $recipies, 'page_title' => 'Выборка по фильтру', 'title' => $title, 'metaOptions' => $metaOptions ]);
     }
 }

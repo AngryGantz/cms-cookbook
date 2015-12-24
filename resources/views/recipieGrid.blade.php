@@ -11,10 +11,11 @@
 <div class="banner banner-blog">
     <div class="container ">
         <div class="main-heading">
-            <h1>{{ $title }}</h1>
+            <h1>{{ $page_title }}</h1>
         </div>
     </div>
 </div>
+@include('widgets.mainfilter')
 <div class="recipes-home-body inner-page">
     <div class="container">
         <div class="row">

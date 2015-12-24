@@ -2,6 +2,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <meta name="description" content="">
+		<?php if(! isset($metaOptions)) $metaOptions = null; ?>
+		<meta name="keywords" content="{{ Meta::getMetaKeywords($metaOptions) }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	    <!--google fonts-->
@@ -39,8 +41,5 @@
 	    <link rel="icon" href="/assets/majestic/images/favicon.png" />
 
 
-
-
-
-		<title>Food & Health</title>
+		<title>{{  $title or 'Food & Health' }} </title>
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->

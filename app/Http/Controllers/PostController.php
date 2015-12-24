@@ -7,14 +7,13 @@ use Illuminate\Http\Request;
 use willvincent\Rateable\Rating;
 use Lanz\Commentable\Comment;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Input;
 use App\Post;
 use App\User;
 use App\Step;
 use App\Marker;
 use App\MarkerGroup;
 use App\MarkerCrossPost;
+use App\Models\CmsOption;
 use Image;
 use Sentinel;
 use Redirect;
@@ -301,7 +300,9 @@ class PostController extends Controller
     public function showRecipiesByMarker($id) {
         $marker = Marker::find($id);
         $recipies = $marker->recipies;
-        return view('recipieGrid', ['recipies' => $recipies, 'title' => $marker->name]);
+        $title = CmsOption::getValue('Название сайта') . ' | '. $marker->name;
+        $metaOptions = ['marker' => $marker];
+        return view('recipieGrid', ['recipies' => $recipies, 'title' => $title, 'page_title' => $marker->name, 'metaOptions' => $metaOptions]);
     }
 
     public function subscribeNews()

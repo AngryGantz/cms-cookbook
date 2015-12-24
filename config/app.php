@@ -158,6 +158,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /*
+         * my providers
+         */
+        App\Providers\HelperServiceProvider::class,
 
     ],
 
@@ -222,6 +226,7 @@ return [
         'FormItem'      => SleepingOwl\Admin\FormItems\FormItem::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Meta'      => App\Helpers\Meta::class,
 
     ],
 
