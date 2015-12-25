@@ -11,6 +11,12 @@ use App\Models\CmsOption;
 use App\Marker;
 
 class Meta {
+    /**
+     * Agregate metakeywords for view.
+     *
+     * @param $metaOptions
+     * @return string
+     */
     public static function getMetaKeywords($metaOptions)
     {
         $mk = CmsOption::getValue('metakey');
@@ -32,4 +38,32 @@ class Meta {
         }
         return $mk;
     }
+
+    /**
+     * Agregate meta description for view
+     *
+     * @param $metaOptions
+     * @return string
+     */
+    public static function getMetaDesc($metaOptions)
+    {
+        $mk = CmsOption::getValue('metadesc');
+        if (isset($metaOptions['marker'])) $mk = $mk.','.$metaOptions['marker']->metadesc;
+        if (isset($metaOptions['recipie'])) {
+            foreach($metaOptions['recipie']->markers as $marker) {
+                $mk = $mk.','.$marker->metadesc;
+            }
+            $mk = $mk.','.$metaOptions['recipie']->metadesc;
+        }
+        if (isset($metaOptions['filter'])) {
+            foreach($metaOptions['filter'] as $idMarker) {
+                If($idMarker>0) {
+                    $marker=Marker::find($idMarker);
+                    if($marker->metadesc != '') $mk = $mk.','.$marker->metadesc;
+                }
+            }
+        }
+        return $mk;
+    }
+
 }

@@ -119,6 +119,12 @@ class HomeController extends BaseController
         return response()->json(['response' => 'Спасибо за подписку', 'guest' => '0']);
     }
 
+    /**
+     * Select recipies by filter
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function filterRecipies(Request $request)
     {
         $recipies=Session::get('recipies');
@@ -127,13 +133,14 @@ class HomeController extends BaseController
         {
             if($idMarker > 0)
             {
-                $recipies = Post::whereHas('markers', function($q) use ($idMarker)
+                $recipies = Post::whereIn('id', $idr)->whereHas('markers', function($q) use ($idMarker, $idr)
                 {
                     $q->where('markers.id', '=', $idMarker);
-                })->whereIn('id', $idr)->get();
+                })->get();
                 $idr = $recipies->pluck('id');
             }
         }
+
         Session::put('recipies', $recipies);
         $title = CmsOption::getValue('Название сайта');
         $metaOptions = ['filter' => $request->filtergroup];

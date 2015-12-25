@@ -17,6 +17,9 @@ use App\Models\CmsOption;
 use Image;
 use Sentinel;
 use Redirect;
+use Session;
+
+
 class PostController extends Controller
 {
     /**
@@ -302,6 +305,7 @@ class PostController extends Controller
         $recipies = $marker->recipies;
         $title = CmsOption::getValue('Название сайта') . ' | '. $marker->name;
         $metaOptions = ['marker' => $marker];
+        Session::put('recipies', $recipies);
         return view('recipieGrid', ['recipies' => $recipies, 'title' => $title, 'page_title' => $marker->name, 'metaOptions' => $metaOptions]);
     }
 

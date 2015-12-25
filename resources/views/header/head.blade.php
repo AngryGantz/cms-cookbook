@@ -1,10 +1,12 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <meta name="description" content="">
+
 		<?php if(! isset($metaOptions)) $metaOptions = null; ?>
 		<meta name="keywords" content="{{ Meta::getMetaKeywords($metaOptions) }}">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="{{ Meta::getMetaDesc($metaOptions) }}">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	    <!--google fonts-->
 {{-- 	    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
