@@ -140,11 +140,9 @@ class HomeController extends BaseController
                 $idr = $recipies->pluck('id');
             }
         }
-
         Session::put('recipies', $recipies);
         $title = CmsOption::getValue('Название сайта');
         $metaOptions = ['filter' => $request->filtergroup];
-//        dd($metaOptions['filter'][0]);
         return view('recipieGrid', [ 'recipies' => $recipies, 'page_title' => 'Выборка по фильтру', 'title' => $title, 'metaOptions' => $metaOptions ]);
     }
 }

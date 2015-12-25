@@ -13,12 +13,10 @@
     <div class="side-bar">
         @include('aside._right_menu1', [ 'groupid' => 3])
         @include('aside._right_popularRecipies', [ 'num' => 4])
-        @include('aside._right_advert', [ 'num' => 4])
+        @include('widgets.advert_aside1', [ 'pos' => 'aside1'])
         @include('aside._right_measure', [ 'num' => 4])
-        @include('aside._right_overlay', [ 'num' => 4])
+        @include('widgets.advert_aside2', [ 'pos' => 'aside2'])
         @include('aside._right_lastposts', [ 'num' => 4])
         {{--@include('aside._right_social', [ 'num' => 4])--}}
-
-
     </div>
 </aside>
