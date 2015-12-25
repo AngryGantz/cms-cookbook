@@ -27,4 +27,11 @@ Admin::model('App\MarkerGroup')->title('Группы маркеров')->display
 		FormItem::multiselect('markers', 'Маркеры')->model('App\Marker')->display('name'),
 	]);
 	return $form;
+})->delete(function ($id)
+{
+	if (in_array($id, [1,2,3]))
+	{
+		return null;
+	}
+	else { return 1;}
 });

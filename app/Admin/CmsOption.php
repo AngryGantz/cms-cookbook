@@ -20,4 +20,11 @@ Admin::model('App\Models\CmsOption')->title('Общие настройки')->di
 		FormItem::text('value', 'Value'),
 	]);
 	return $form;
+})->delete(function ($id)
+{
+	if (in_array($id, [1,2,3]))
+	{
+		return null;
+	}
+	else { return 1;}
 });
