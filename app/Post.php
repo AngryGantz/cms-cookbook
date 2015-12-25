@@ -181,6 +181,9 @@ class Post extends Model
         }
     }
 
-
+    public static function getRandomRecipie()
+    {
+        return Post::orderByRaw("RAND()")->first();
+    }
 
 }
