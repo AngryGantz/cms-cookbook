@@ -37,12 +37,12 @@
                             <div class="widget widget-footer social-icons">
                                 <h2 class="wow animated fadeInRight">Мы в социальных сетях</h2>
                                 <ul>
-                                    <li class="wow animated bounceInRight"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="wow animated bounceInRight animation-delay100ms"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="wow animated bounceInRight animation-delay200ms" ><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li class="wow animated bounceInRight animation-delay300ms"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="wow animated bounceInRight"><a href="#"><i class="fa fa-vk"></i></a></li>
+                                    <li class="wow animated bounceInRight animation-delay100ms" ><a href="#"><i class="fa fa-odnoklassniki"></i></a></li>
+                                    <li class="wow animated bounceInRight  animation-delay200ms"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="wow animated bounceInRight animation-delay300ms"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="wow animated bounceInRight animation-delay400ms"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                     <li class="wow animated bounceInRight animation-delay400ms" ><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                                    <li class="wow animated bounceInRight animation-delay500ms"><a href="#"><i class="fa fa-flickr"></i></a></li>
                                 </ul>
                             </div>
                         </div>

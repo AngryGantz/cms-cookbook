@@ -9,12 +9,8 @@ Admin::model('App\Marker')->title('Маркеры')->display(function ()
 	]);
 	$display->columns([
 		Column::string('name')->label('Имя'),
-//		Column::string('longname')->label('Длинное имя'),
-			Column::lists('markerGroups.name')->label('Входит в группы'),
+		Column::lists('markerGroups.name')->label('Входит в группы'),
 		Column::image('ico')->label('Иконка'),
-
-//		Column::string('metakey')->label('Meta Keywords'),
-//		Column::string('metadesk')->label('Meta Description'),
 	]);
 	return $display;
 })->createAndEdit(function ()

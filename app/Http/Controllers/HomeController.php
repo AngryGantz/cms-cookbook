@@ -19,7 +19,7 @@ class HomeController extends BaseController
      */
     public function index()
     {
-       $recipies = Post::all();
+       $recipies = Post::where('postStatus_id','=', 3)->get();
        Session::put('recipies', $recipies);
        $title = CmsOption::getValue('Название сайта');
        return view('home', [ 'recipies' => $recipies, 'title' => $title ]);
@@ -133,7 +133,7 @@ class HomeController extends BaseController
         {
             if($idMarker > 0)
             {
-                $recipies = Post::whereIn('id', $idr)->whereHas('markers', function($q) use ($idMarker, $idr)
+                $recipies = Post::whereIn('id', $idr)->where('postStatus_id','=', 3)->whereHas('markers', function($q) use ($idMarker, $idr)
                 {
                     $q->where('markers.id', '=', $idMarker);
                 })->get();
