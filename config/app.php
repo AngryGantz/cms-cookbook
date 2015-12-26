@@ -150,7 +150,7 @@ return [
         Pingpong\Generators\GeneratorsServiceProvider::class,
         Lanz\Commentable\CommentableServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
-        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+//        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,7 +230,7 @@ return [
         'Debugbar'      => Barryvdh\Debugbar\Facade::class,
         'Meta'          => App\Helpers\Meta::class,
         'AdvertHelper'        => App\Helpers\AdvertHelper::class,
-        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+//        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
 
     ],
 
