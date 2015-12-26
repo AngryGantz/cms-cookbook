@@ -48,7 +48,7 @@
     <div class="row">
         <h4>О себе</h4>
         <br>
-        {{ $user->about }}
+        {!!  $user->about  !!}
     </div>
     <br>
     <div class="row">
