@@ -14038,5 +14038,21 @@ namespace {
     }
 
 
+    class Recaptcha extends \Greggilbert\Recaptcha\Facades\Recaptcha{
+        
+        /**
+         * Render the recaptcha
+         *
+         * @param array $options
+         * @return \Greggilbert\Recaptcha\view 
+         * @static 
+         */
+        public static function render($options = array()){
+            return \Greggilbert\Recaptcha\Recaptcha::render($options);
+        }
+        
+    }
+
+
 }
 

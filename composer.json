@@ -20,7 +20,8 @@
         "lanz/laravel-commentable": "~2.0",
         "unisharp/laravel-ckeditor": "dev-master",
         "sleeping-owl/with-join": "1.x",
-        "rtconner/laravel-tagging": "~2.0"
+        "rtconner/laravel-tagging": "~2.0",
+        "greggilbert/recaptcha": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
