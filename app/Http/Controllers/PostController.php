@@ -333,9 +333,12 @@ class PostController extends Controller
 //        return response()->json(['response' => 'Спасибо за подписку', 'guest' => '0']);
     }
 
-    public function showRecipieUrlWithSlug() {
+    public function showRecipieUrlWithSlug($slug) {
         $recipie = Session::get('tmprecipie');
 
+        if(! isset($recipie)) {
+            $recipie=Post::where('slug', '=', $slug)->first();
+        }
         $title = CmsOption::getValue('Название сайта');
         $metaOptions = ['recipie' => $recipie];
         return view('recipieSingle', [ 'recipie' => $recipie, 'title' => $title, 'metaOptions' => $metaOptions ]);

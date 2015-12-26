@@ -3,7 +3,7 @@
     <div class="container">
         <div class="footer-inner">
             <div class="text-center">
-                <a class="logo-footer wow animated zoomIn" href="index.html"><img src="/assets/majestic/images/logo2.png" alt="Logo"/></a>
+                <a class="logo-footer wow animated zoomIn" href="index.html"><img src="/assets/majestic/images/logo4.png" alt="Logo"/></a>
                 <p class="wow animated flipInX">
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
                     <br/>
