@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <p>
-                        {{ str_limit($autor->about, 350) }}
+                        {!!  str_limit($autor->about, 350)  !!}
                     </p>
                     <a href="{{ URL::to('/user/' . $autor->id )}}" class="read-more-angle">Больше информации</a>
                 </div>
