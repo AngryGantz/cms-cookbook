@@ -16,7 +16,7 @@
         <div class="step-detail">
             <h3>Шаг {{ $count }}.</h3>
             <p>
-                {{ $step->text }}
+                {!!  $step->text  !!}
             </p>
         </div>
     </div>
