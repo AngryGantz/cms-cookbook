@@ -27,7 +27,7 @@
             {{--@endif--}}
             <div class="tags-icons">
                 <div class="row">
-                    <div class="col-sm-5">
+                    <div class="col-sm-8">
                         <div class="details-social-icons">
                             <ul class="ulsocial_profile">
                                 <li><a href="{{ $user->social_fb }}"><i class="fa fa-facebook"></i></a></li>
