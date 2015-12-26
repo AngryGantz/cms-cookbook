@@ -163,7 +163,7 @@ class Post extends Model
      * @return mixed
      */
     public static function getPopularRecipies($num) {
-        return  DB::table('posts')->orderBy('views', 'desc')->take($num)->get();
+        return  DB::table('posts')->where('postStatus_id','=', 3)->orderBy('views', 'desc')->take($num)->get();
     }
 
     /**
@@ -175,15 +175,15 @@ class Post extends Model
     public static function getLastRecipies($num) {
         if (DB::table('posts')->count() <= $num )
         {
-            return  DB::table('posts')->orderBy('created_at', 'desc')->get();
+            return  DB::table('posts')->where('postStatus_id','=', 3)->orderBy('created_at', 'desc')->get();
         } else {
-            return  DB::table('posts')->orderBy('created_at', 'desc')->take($num)->get();
+            return  DB::table('posts')->where('postStatus_id','=', 3)->orderBy('created_at', 'desc')->take($num)->get();
         }
     }
 
     public static function getRandomRecipie()
     {
-        return Post::orderByRaw("RAND()")->first();
+        return Post::where('postStatus_id','=', 3)->orderByRaw("RAND()")->first();
     }
 
 }
