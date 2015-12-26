@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="logo-wrapper">
-                            <a href="/"><img src="/assets/majestic/images/logo.png" alt="logo"/></a>
+                            <a href="/"><img src="/assets/majestic/images/logo3.png" alt="logo"/></a>
                         </div>
                     </div>
                     <div class="col-md-8">
