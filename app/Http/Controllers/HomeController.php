@@ -97,6 +97,7 @@ class HomeController extends BaseController
         $recipie = Post::find($id);
         $recipie->views = $recipie->views +1;
         $recipie->save();
+        Session::put('typepage', 'recipie');
         return Redirect::to('/recipies/'.$recipie->slug)
             ->with('tmprecipie', $recipie);
     }

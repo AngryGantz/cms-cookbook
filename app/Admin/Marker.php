@@ -22,6 +22,7 @@ Admin::model('App\Marker')->title('Маркеры')->display(function ()
 		FormItem::image('ico', 'Иконка'),
 		FormItem::text('metakey', 'Meta Keywords'),
 		FormItem::text('metadesk', 'Meta Description'),
+		FormItem::text('slug', 'Slug (если пустое, генерируется реалтайм из имени)'),
 	]);
 	return $form;
 });

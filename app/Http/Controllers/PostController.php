@@ -313,7 +313,13 @@ class PostController extends Controller
         $title = CmsOption::getValue('Название сайта') . ' | '. $marker->name;
         $metaOptions = ['marker' => $marker];
         Session::put('recipies', $recipies);
-        return view('recipieGrid', ['recipies' => $recipies, 'title' => $title, 'page_title' => $marker->name, 'metaOptions' => $metaOptions]);
+        Session::put('marker', $marker);
+        Session::put('typepage', 'bymarker');
+        if($marker->slug == '') $markerslug = \Slug::make($marker->name);
+        else $markerslug = $marker->slug;
+        return Redirect::to('/recipies/'.$markerslug);
+
+
     }
 
     public function subscribeNews()
@@ -333,16 +339,26 @@ class PostController extends Controller
 //        return response()->json(['response' => 'Спасибо за подписку', 'guest' => '0']);
     }
 
-    public function showRecipieUrlWithSlug($slug) {
-        $recipie = Session::get('tmprecipie');
-
-        if(! isset($recipie)) {
-            $recipie=Post::where('slug', '=', $slug)->first();
+    public function showRecipieUrlWithSlug($slug)
+    {
+        $type = Session::get('typepage');
+        switch($type){
+            case 'recipie':
+                $recipie = Session::get('tmprecipie');
+                if(! isset($recipie)) {
+                    $recipie=Post::where('slug', '=', $slug)->first();
+                }
+                $title = CmsOption::getValue('Название сайта');
+                $metaOptions = ['recipie' => $recipie];
+                return view('recipieSingle', [ 'recipie' => $recipie, 'title' => $title, 'metaOptions' => $metaOptions ]);
+                break;
+            case 'bymarker':
+                $marker = Session::get('marker');
+                $recipies = Session::get('recipies');
+                $title = CmsOption::getValue('Название сайта') . ' | '. $marker->name;
+                $metaOptions = ['marker' => $marker];
+                return view('recipieGrid', ['recipies' => $recipies, 'title' => $title, 'page_title' => $marker->name, 'metaOptions' => $metaOptions]);
         }
-        $title = CmsOption::getValue('Название сайта');
-        $metaOptions = ['recipie' => $recipie];
-        return view('recipieSingle', [ 'recipie' => $recipie, 'title' => $title, 'metaOptions' => $metaOptions ]);
-
     }
 
 }
