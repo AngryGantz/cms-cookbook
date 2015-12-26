@@ -287,14 +287,14 @@ class PostController extends Controller
                 if(! isset($recipie)) {
                     $recipie=Post::where('slug', '=', $slug)->first();
                 }
-                $title = CmsOption::getValue('Название сайта');
+                $title = $recipie->title  . ' | ' . CmsOption::getValue('Название сайта');
                 $metaOptions = ['recipie' => $recipie];
                 return view('recipieSingle', [ 'recipie' => $recipie, 'title' => $title, 'metaOptions' => $metaOptions ]);
                 break;
             case 'bymarker':
                 $marker = Session::get('marker');
                 $recipies = Session::get('recipies');
-                $title = CmsOption::getValue('Название сайта') . ' | '. $marker->name;
+                $title  = $marker->name . ' | ' . CmsOption::getValue('Название сайта');
                 $metaOptions = ['marker' => $marker];
                 return view('recipieGrid', ['recipies' => $recipies, 'title' => $title, 'page_title' => $marker->name, 'metaOptions' => $metaOptions]);
         }
