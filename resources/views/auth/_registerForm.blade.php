@@ -24,6 +24,18 @@
 		</div>
 	</div>
 
+	<div class="form-group{!! $errors->has('recaptcha') ? ' has-error' : null !!}">
+		<label for="recaptcha" class="col-sm-4 control-label">Код с картинки</label>
+		<div class="col-sm-8">
+			{!! Recaptcha::render() !!}
+			<p class="help-block">{!! $errors->first('recaptcha') !!}</p>
+		</div>
+	</div>
+
+
+
+
+
 	<div class="form-group">
 		<div class="col-sm-8 col-sm-push-4">
 			{!! Form::submit('Регистрация', array('class' => 'btn btn-primary')) !!}
