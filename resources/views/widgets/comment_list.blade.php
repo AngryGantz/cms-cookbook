@@ -24,7 +24,7 @@
                 <h5><a href="{{ URL::to('/user/' . $commentAutor->id ) }}">{{ $commentAutor->first_name }}</a></h5>
                 <span class="time">{{ $comment->created_at->format('d.m.Y - H:i') }}</span>
                 <p>
-                    {{ $comment->body }}
+                    {!!  $comment->body  !!}
                 </p>
                 {{--<a href="#" class="reply-button">Reply</a>--}}
             </div>
