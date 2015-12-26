@@ -151,6 +151,7 @@ return [
         Lanz\Commentable\CommentableServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+        Alexusmai\Ruslug\RuslugServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,6 +232,7 @@ return [
         'Meta'          => App\Helpers\Meta::class,
         'AdvertHelper'        => App\Helpers\AdvertHelper::class,
         'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+        'Slug' => Alexusmai\Ruslug\RuslugFacade::class,
 
     ],
 

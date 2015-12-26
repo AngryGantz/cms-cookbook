@@ -87,6 +87,7 @@ class PostController extends Controller
         $post->metakey = "";
         $post->metadesc = "";
         if (! is_null($request->file('imgpost'))) $post->img = $this->saveImage($request->file('imgpost'));
+        $post->slug = \Slug::make($post->title);
 
         $post->save(); // save post
         $post->steps()->saveMany($arrPrepareSteps); // save new steps for this post
@@ -181,6 +182,12 @@ class PostController extends Controller
         if (! is_null($request->input('img'))) $post->img = $request->input('img');
         if (! is_null($request->input('metakey'))) $post->metakey = $request->input('metakey');
         if (! is_null($request->input('metadesc'))) $post->metadesc = $request->input('metadesc');
+        if ($request->input('slug') == '') {
+            $post->slug = \Slug::make($post->title);
+        } else {
+            $post->slug = $request->input('slug');
+        }
+
 
         $post->save(); // save post
         $post->steps()->delete(); // delete old steps for this post
@@ -326,6 +333,13 @@ class PostController extends Controller
 //        return response()->json(['response' => 'Спасибо за подписку', 'guest' => '0']);
     }
 
+    public function showRecipieUrlWithSlug() {
+        $recipie = Session::get('tmprecipie');
 
+        $title = CmsOption::getValue('Название сайта');
+        $metaOptions = ['recipie' => $recipie];
+        return view('recipieSingle', [ 'recipie' => $recipie, 'title' => $title, 'metaOptions' => $metaOptions ]);
+
+    }
 
 }

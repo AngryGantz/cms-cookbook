@@ -196,6 +196,7 @@ Route::post('subsnews', 'HomeController@subscribeNews');
 
 Route::post('/filter', 'HomeController@filterRecipies');
 
+Route::get('/recipies/{slug}', 'PostController@showRecipieUrlWithSlug');
 
 /**
  *

@@ -8,6 +8,7 @@ use App\Post;
 use App\Models\CmsOption;
 use Mail;
 use Session;
+use Redirect;
 
 
 class HomeController extends BaseController
@@ -96,10 +97,8 @@ class HomeController extends BaseController
         $recipie = Post::find($id);
         $recipie->views = $recipie->views +1;
         $recipie->save();
-        $title = CmsOption::getValue('Название сайта');
-        $metaOptions = ['recipie' => $recipie];
-        return view('recipieSingle', [ 'recipie' => $recipie, 'title' => $title, 'metaOptions' => $metaOptions ]);
-
+        return Redirect::to('/recipies/'.$recipie->slug)
+            ->with('tmprecipie', $recipie);
     }
 
     /**
