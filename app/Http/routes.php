@@ -195,3 +195,17 @@ Route::get('/menu/{id}', 'PostController@showRecipiesByMarker');
 Route::post('subsnews', 'HomeController@subscribeNews');
 
 Route::post('/filter', 'HomeController@filterRecipies');
+
+
+/**
+ *
+ * BlogPost Routes
+ *
+ */
+
+Route::get('addblogpost', 'BlogPostController@create');
+Route::post('addblogpost', 'BlogPostController@store');
+Route::get('blog/index/', 'BlogPostController@index');
+Route::get('blog/{id}', 'BlogPostController@show');
+Route::post('/blog/addcomment/{id}', 'BlogPostController@addComment');
+Route::get('blog/tags/{slug}', 'BlogPostController@showByTag');

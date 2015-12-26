@@ -165,9 +165,40 @@
              }
          });
      }
-
-
-         function subscribe() {
+     function addcommentblog(blogpostid) {
+             var msg   = $('#formxblog').serialize();
+             $.ajax({
+                 type: 'POST',
+                 url: '/blog/addcomment/'+blogpostid,
+                 data: msg,
+                 success: function(data) {
+                     if (data.guest == '1') {
+                         $("#thanksforcomment").html("<div>"+data.thanx+"</div>");
+                     } else {
+                         var newCommentsDiv = '<li>' +
+                                 '<div class="avatar">' +
+                                 '<a href="/user/'+ data.userid +'"><img src="/imager/fullpath/'+ data.useravatar +'/83/10000" alt="avatar"/></a>' +
+                                 '</div>' +
+                                 '<div class="comment">' +
+                                 '<h5><a href="/user/'+ data.userid +'">'+data.username+'</a></h5>' +
+                                 '<span class="time">('+ data.datetime +')</span>' +
+                                 '<p>' +
+                                 data.newcomment +
+                                 '</p>' +
+//                             '<a href="#" class="reply-button">Reply</a>' +
+                                 '</div>' +
+                                 '</li>';
+                         $("#thanksforcomment").html("<div>"+data.thanx+"</div>");
+                         $('#comments-list').append(newCommentsDiv);
+                         $('#comments-list').children("li").slideDown();
+                     }
+                 },
+                 error:  function(xhr, str){
+                     alert('Возникла ошибка: ' + xhr.responseCode);
+                 }
+             });
+         }
+     function subscribe() {
              var msg   = $('#frmsubscribe').serialize();
              $.ajax({
                  type: 'post',

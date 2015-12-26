@@ -19,7 +19,8 @@
         "pingpong/generators": "~2.0",
         "lanz/laravel-commentable": "~2.0",
         "unisharp/laravel-ckeditor": "dev-master",
-        "sleeping-owl/with-join": "1.x"
+        "sleeping-owl/with-join": "1.x",
+        "rtconner/laravel-tagging": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
