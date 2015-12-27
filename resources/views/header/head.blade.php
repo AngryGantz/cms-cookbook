@@ -40,7 +40,7 @@
 	    <link rel="stylesheet" href="/assets/majestic/css/main.css"/>
 
 	    <!-- site favicon -->
-	    <link rel="icon" href="/assets/majestic/images/favicon.png" />
+	    <link rel="icon" href="/assets/majestic/images/favicon.ico" />
 
 
 		<title>{{  $title or 'Food & Health' }} </title>
