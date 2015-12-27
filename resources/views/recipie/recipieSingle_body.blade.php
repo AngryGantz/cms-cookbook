@@ -74,7 +74,7 @@
         </div>
 
         <div class="recipe-detail-body">
-            <a href="#" class="print-button"><i class="fa fa-print"></i>Распечатать</a>
+            <a href="#" target="_blank" class="print-button"><i class="fa fa-print"></i>Распечатать</a>
 
             {{-- Name some groups of marker and name markers --}}
             <ul class="pre-tags">

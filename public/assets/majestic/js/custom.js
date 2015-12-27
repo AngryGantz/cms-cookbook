@@ -154,9 +154,19 @@
 
         $(".print-button").on('click', function(e){
 
+            $(".slider-recipe-detail").hide();
+            $(".about-chef").hide();
+            $(".related-recipes").hide();
+            $(".recipe-comments").hide();
+
+
             $(".steps-tabs").slick('unslick');
             $(".steps-detail").slick('unslick');
             window.print();
+            $(".slider-recipe-detail").show();
+            $(".about-chef").show();
+            $(".related-recipes").show();
+            $(".recipe-comments").show();
             e.preventDefault();
         } );
     }
