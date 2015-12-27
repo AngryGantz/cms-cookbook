@@ -2,7 +2,7 @@
 @section('body')
 	@include('widgets.home_slider')
 	@include('widgets.mainfilter')
-	<div class="recipes-home-body">
+	<div class="recipes-home-body inner-page">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-lg-9">

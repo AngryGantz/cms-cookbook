@@ -65,7 +65,7 @@
                                 <li><a href="{{ URL::to('addblogpost') }}">Добавить статью</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="{{ URL::to('contacts') }}">Контакты</a></li>
                         <li class="submit-recipe"><a href="{{ URL::to('addpost') }}">Добавить рецепт</a></li>
                     </ul>
                 </nav>

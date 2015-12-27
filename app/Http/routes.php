@@ -210,3 +210,11 @@ Route::get('blog/index/', 'BlogPostController@index');
 Route::get('blog/{id}', 'BlogPostController@show');
 Route::post('/blog/addcomment/{id}', 'BlogPostController@addComment');
 Route::get('blog/tags/{slug}', 'BlogPostController@showByTag');
+
+/**
+ *
+ * Contacts route
+ *
+ */
+Route::get('contacts', 'HomeController@contacts');
+Route::post('contacts', 'HomeController@contactsProcess');

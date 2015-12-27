@@ -19,6 +19,7 @@ class CmsOptionsSeeder extends Seeder
             [ 'name' => 'Название сайта', 'value' => ' CMS DP-CookBook' ],
             [ 'name' => 'metakey', 'value' => '' ],
             [ 'name' => 'metadesc', 'value' => '' ],
+            [ 'name' => 'Email для оповещения ', 'value' => '' ],
 
         ]);
 

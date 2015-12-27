@@ -145,4 +145,9 @@ class HomeController extends BaseController
         $metaOptions = ['filter' => $request->filtergroup];
         return view('recipieGrid', [ 'recipies' => $recipies, 'page_title' => 'Выборка по фильтру', 'title' => $title, 'metaOptions' => $metaOptions ]);
     }
+
+    public function contacts()
+    {
+        return view('contacts.contacts');
+    }
 }
