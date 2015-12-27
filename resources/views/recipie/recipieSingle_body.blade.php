@@ -41,13 +41,15 @@
                     <img src="{{ URL::to('/imager/fullpath/' . basename($recipie->img)).'/655/454'  }}" alt="{{ $recipie->title }}">
                     {{--@include('recipie._recipieSingle_TopSlider')--}}
                 </div>
-                {{--<ul class="recipe-specs">--}}
-                {{--<li><span class="count">5</span><span class="text">Yield</span></li>--}}
-                {{--<li><span class="count">7</span><span class="text">Servings</span></li>--}}
-                {{--<li><span class="count">20<span>m</span></span><span class="text">Prep Time</span></li>--}}
-                {{--<li><span class="count">30<span>m</span></span><span class="text">Cook Time</span></li>--}}
-                {{--<li><span class="count">50<span>m</span></span><span class="text">Ready In</span></li>--}}
-                {{--</ul>--}}
+                <ul class="recipe-specs">
+                    <li><span class="text">Время <br> подготовки</span><span class="count">{{ $recipie->calory }}</span> </li>
+                    <li><span class="text">Время <br> приготовления</span><span class="count">{{ $recipie->timecook }}</span> </li>
+                    {{--<li><span class="count">5</span><span class="text">Yield</span></li>--}}
+                    {{--<li><span class="count">7</span><span class="text">Servings</span></li>--}}
+                    {{--<li><span class="count">20<span>m</span></span><span class="text">Prep Time</span></li>--}}
+                    {{--<li><span class="count">30<span>m</span></span><span class="text">Cook Time</span></li>--}}
+                    {{--<li><span class="count">50<span>m</span></span><span class="text">Ready In</span></li>--}}
+                </ul>
 
                 {{--<ul class="recipe-specs">--}}
                     {{--<li>Блок Adsens</li>--}}
@@ -70,7 +72,7 @@
 
             {{-- Recipie cook time --}}
 
-                <li><span>Время приготовления : </span>{{ $recipie->timecook }}</li>
+                {{--<li><span>Время приготовления : </span>{{ $recipie->timecook }}</li>--}}
             </ul>
 
             <div class="separator-post"></div>
