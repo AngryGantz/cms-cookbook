@@ -1,6 +1,9 @@
 {{-- {!! Form::open(array('class' => 'form-horizontal')) !!} --}}
 {!! Form::open(array('enctype' => 'multipart/form-data')) !!}
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+
+
 	{{-- Name Recipie --}}
 	<div class="{!! $errors->has('title') ? 'has-error' : null !!}">
 		<label for="title">Название</label>
@@ -9,7 +12,6 @@
 	</div>
 
 	 {{--Select marker from Group markers--}}
-
 	<div class="row">
 		@foreach ($mgroups as $mgroup)
 			<div class="col-sm-6">
@@ -25,8 +27,10 @@
 	</div>
 	<div class="separator-post"></div>
 
-	 {{--Select marker without group--}}
 
+
+
+	 {{--Select marker without group--}}
 	<div class="row">
 		@foreach (\App\Marker::where('showadd','=', 1)->get() as $marker)
 			<div class="col-sm-6">
@@ -38,19 +42,23 @@
 	<div class="separator-post"></div>
 
 
-	{{-- Recipie Image  --}}
 
+
+	{{-- Recipie Image  --}}
 	<div class="upload">
 		<label for="imgpost">Изображение</label>
-		<div class="file-preview">
+		<div class="file-preview" onclick="fncaa('alinkimg{{$i=1}}');">
 			<i class="fa fa-picture-o fa-3x"></i>
 		</div>
-		<input type="file" name="imgpost" style="display: none;" >
+		<input  id="alinkimg{{$i=1}}"  type="file" name="imgpost" style="display: none;" >
 	</div>
 	<br>
 
-	{{-- Text --}}
 
+
+
+
+	{{-- Text --}}
 	<div class="{!! $errors->has('text') ? 'has-error' : null !!}">
 		<label for="text">Описание</label>
     	{!! Form::textarea('text', null, array('placeholder' => '', 'rows' => '12')) !!}
@@ -83,31 +91,33 @@
 		</div>
 	</div>
 
-	{{-- Steps of cook --}}
 
+
+
+	{{-- Steps of cook --}}
     <fieldset class="ingredient-set">
-		    	<div class="{!! $errors->has('steps[0]') ? 'has-error' : null !!}">
-			        <label for="steps[0]">Этапы приготовления</label>
-			        <ul class="list-sortable steps">
-			            <li>
-			                <div class="add-fields">
-					    		<div class="col-sm-2">
-					    			<div class="upload">
-									    <div class="file-preview"><i class="fa fa-picture-o fa-3x"></i></div>
-									    <input type="file" name="imgstep[0]" style="display: none;" >
-									</div>
-					    		</div>
-								 {{--<span class="handler-list"><i class="fa fa-arrows"></i></span>--}}
-                    			{!! Form::textarea('steps[0]', null, array('placeholder' => '', 'rows' => '3', 'cols' => '30', 'id' => 'steps1')) !!}
-                  				<span class="del-list"><i class="fa fa-trash"></i></span>
-			                </div>
-			            </li>
-			        </ul>
-			         <span class="add-button add-steps">
-			            <i class="fa fa-plus"></i>
-			        </span>
-			        <p class="help-block">{!! $errors->first('steps[0]') !!}</p>
-			    </div>
+		<div class="{!! $errors->has('steps[0]') ? 'has-error' : null !!}">
+			<label for="steps[0]">Этапы приготовления</label>
+			<ul class="list-sortable steps">
+				<li>
+					<div class="add-fields">
+						<div class="col-sm-2">
+							<div class="upload">
+								<div class="file-preview" onclick="fncaa('alinkimgstep0');"><i class="fa fa-picture-o fa-3x"></i></div>
+								<input id="alinkimgstep0" type="file" name="imgstep[0]" style="display: none;" >
+							</div>
+						</div>
+						 {{--<span class="handler-list"><i class="fa fa-arrows"></i></span>--}}
+						{!! Form::textarea('steps[0]', null, array('placeholder' => '', 'rows' => '3', 'cols' => '30', 'id' => 'steps1')) !!}
+						<span class="del-list"><i class="fa fa-trash"></i></span>
+					</div>
+				</li>
+			</ul>
+			 <span class="add-button add-steps">
+				<i class="fa fa-plus"></i>
+			</span>
+			<p class="help-block">{!! $errors->first('steps[0]') !!}</p>
+		</div>
     </fieldset>
 
 <div class="form-group">

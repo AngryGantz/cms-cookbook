@@ -332,8 +332,8 @@
             '<div class="add-fields">' +
             '<div class="col-sm-2">' +
                 '<div class="upload">' +
-                    '<div class="file-preview"><i class="fa fa-picture-o fa-3x"></i></div>' +
-                    '<input type="file" name="imgstep[]" style="display: none;">' +
+                    '<div class="file-preview"  onclick="fncaa(\'alinkimgstep'+$numstep+'\');" ><i class="fa fa-picture-o fa-3x"></i></div>' +
+                    '<input id="alinkimgstep'+$numstep+'" type="file" name="imgstep[]" style="display: none;">' +
                 '</div>' +
             '</div>'+
             //' <span class="handler-list"><i class="fa fa-arrows"></i></span>' +
@@ -360,11 +360,12 @@
             $this.closest( 'li' ).slideUp(function() { $(this).remove(); });
         });
 
-            $(".file-preview").on('click', function(){
-                $(this).siblings('input[type=file]').trigger('click');
-            });
 
-            $('input[type=file]').on('change', function(e) {
+        //$(".file-preview").on('click', function(){
+        //    $(this).next('input[type=file]').trigger('click');
+        //});
+
+        $('input[type=file]').on('change', function(e) {
             if(typeof FileReader == "undefined") return true;
 
             var elem = $(this);
@@ -387,10 +388,8 @@
                     })(file);
                     reader.readAsDataURL(file);
                 }
-            }   
+            }
         });
-
-        
     }
 
 

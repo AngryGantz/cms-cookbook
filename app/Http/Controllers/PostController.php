@@ -63,8 +63,10 @@ class PostController extends Controller
         $strArrOldImgFileNamesForSteps = $request->input('imgnamestep');
         $selfmarkers=$request->selfmarkers;
         $arrMarkersForPost = $request->input('recipe-type');
-        $arrMarkersForPost = $arrMarkersForPost+$selfmarkers;
-        $arrMarkersForPost= array_merge($arrMarkersForPost,$selfmarkers);
+
+        if ($selfmarkers)
+            $arrMarkersForPost= array_merge($arrMarkersForPost,$selfmarkers);
+
         $arrPrepareSteps = $this->makePrepareSteps($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps);
         $post = new Post;
         $post->user_id = Sentinel::check()->getUserId();

@@ -72,10 +72,16 @@
 //        });
 //    }
 
+
+function fncaa(idlink){
+    console.log('ssssssssssss');
+    $('#'+idlink).trigger('click');
+}
     $( document ).ready(function() {
-        $(".file-preview").on('click', function(){
-            $(this).siblings('input[type=file]').trigger('click');
-        });
+
+//        $(".file-preview").on('click', function(){
+//            $(this).next('input[type=file]').trigger('click');
+//        });
 
         $('input[type=file]').on('change' ,function(e) {
             if(typeof FileReader == "undefined") {
@@ -220,8 +226,6 @@
         jQuery(document).ready(function ($) {
 
             $('#tabs').tab();
-
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
