@@ -6889,7 +6889,10 @@ form div.upload { overflow:hidden; }
 form div.upload label { font-weight:bold; display:block; margin-bottom:0.25em; }
 
 form div.upload div.file-preview {
-    background:#ccc;
+    cursor: pointer;
+    /*background:#ccc;*/
+    background: black;
+    color: #6EBE3B;
     border:1px solid #000;
     display:inline-block;
     float:left;
@@ -6897,4 +6900,9 @@ form div.upload div.file-preview {
     width:100px;
     height:100px;
     text-align:center;
+}
+
+form div.upload div.file-preview:hover {
+    background: #6EBE3B;
+  color: white;
 }
