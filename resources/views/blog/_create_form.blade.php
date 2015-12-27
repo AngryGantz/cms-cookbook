@@ -20,7 +20,7 @@
 {{-- BlogPost Image  --}}
 <div class="upload">
     <label for="imgpost">Изображение</label>
-    <div class="file-preview"><br>нажмите для загрузки</div>
+    <div class="file-preview"><i class="fa fa-picture-o fa-3x"></i></div>
     <input type="file" name="imgpost" style="display: none;" >
 </div>
 <br>
