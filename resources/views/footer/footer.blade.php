@@ -52,11 +52,13 @@
             <div class="footer-copyright text-center">
                 <p>&copy; Copyright 2015 All Rights Reserved by <a href="#">DP Studio</a></p>
             </div>
+
             <div class="corner-image wow animated fadeInRight">
                 <img src="images/footer-corner-image.jpg" alt="image"/>
             </div>
         </div>
+        @include('widgets.advert_aside1', [ 'pos' => 'foot_script'])
     </div>
 </div>
-@include('widgets.advert_aside1', [ 'pos' => 'foot_script'])
+
 <!--footer ends-->

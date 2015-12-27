@@ -31,7 +31,7 @@ Admin::model('App\Post')->title('')->display(function ()
 						],
 						[
 							FormItem::text('timecook', 'Время приготовления'),
-							FormItem::text('calory', 'Калории'),
+							FormItem::text('calory', 'Время подготовки'),
 							FormItem::text('metakey', 'Metakey'),
 							FormItem::text('metadesc', 'Metadesc'),
 							FormItem::text('slug', 'Slug (Если оставить пустым гененрируется при сохранении)'),
@@ -74,7 +74,7 @@ Admin::model('App\Post')->title('')->display(function ()
 							],
 							[
 									FormItem::text('timecook', 'Время приготовления'),
-									FormItem::text('calory', 'Калории'),
+									FormItem::text('calory', 'Время подготовки'),
 									FormItem::text('metakey', 'Metakey'),
 									FormItem::text('metadesc', 'Metadesc'),
 									FormItem::text('slug', 'Slug (Если оставить пустым гененрируется при сохранении)'),

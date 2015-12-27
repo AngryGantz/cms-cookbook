@@ -73,7 +73,6 @@
 	</div>
 
 	{{-- Cook time and Calory (2 columns 1 row)  --}}
-
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="{!! $errors->has('timecook') ? 'has-error' : null !!}">
@@ -84,7 +83,7 @@
 		</div>
 		<div class="col-sm-6">
 			<div class="{!! $errors->has('calory') ? 'has-error' : null !!}">
-				<label for="calory">Калории</label>
+				<label for="calory">Время подготовки</label>
 				{!! Form::text('calory', null, array('placeholder' => '')) !!}
 				<p class="help-block">{!! $errors->first('calory') !!}</p>
 			</div>
