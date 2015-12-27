@@ -122,6 +122,7 @@
         </div>
 
         {{-- About autor recipie --}}
+
         <div class="about-chef">
             <h3 class="lined">Автор</h3>
             <?php $autor = $recipie->user ?>
@@ -137,12 +138,14 @@
                             <h4><a href="{{ URL::to('/user/' . $autor->id )}}">{{ $autor->first_name }} {{ $autor->last_name }} </a></h4>
                         </div>
                         <div class="col-sm-4">
+                            <noindex>
                             <ul class="chef-social-links">
                                 <li><a href="{{ $autor->social_fb }}"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="{{ $autor->social_twitter }}"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="{{ $autor->social_gplus }}"><i class="fa fa-google-plus"></i></a></li>
                                 <li><a href="{{ $autor->social_vk }}"><i class="fa fa-vk"></i></a></li>
                             </ul>
+                            </noindex>
                         </div>
                     </div>
                     <p>
