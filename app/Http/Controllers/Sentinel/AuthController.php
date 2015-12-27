@@ -43,6 +43,7 @@ class AuthController extends BaseController {
 			$rules = [
 				'email'    => 'required|email',
 				'password' => 'required',
+				'g-recaptcha-response' => 'required|recaptcha',
 			];
 
 			$validator = Validator::make($input, $rules);

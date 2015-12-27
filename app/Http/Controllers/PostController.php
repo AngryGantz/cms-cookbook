@@ -63,7 +63,6 @@ class PostController extends Controller
         $strArrOldImgFileNamesForSteps = $request->input('imgnamestep');
         $selfmarkers=$request->selfmarkers;
         $arrMarkersForPost = $request->input('recipe-type');
-
         if ($selfmarkers)
             $arrMarkersForPost= array_merge($arrMarkersForPost,$selfmarkers);
 
