@@ -13,16 +13,40 @@ Admin::model('App\Marker')->title('Маркеры')->display(function ()
 		Column::image('ico')->label('Иконка'),
 	]);
 	return $display;
-})->createAndEdit(function ()
+})->create(function ()
 {
 	$form = AdminForm::form();
 	$form->items([
-		FormItem::text('name', 'Имя'),
-		FormItem::text('longname', 'Длинное имя'),
-		FormItem::image('ico', 'Иконка'),
-		FormItem::text('metakey', 'Meta Keywords'),
-		FormItem::text('metadesk', 'Meta Description'),
-		FormItem::text('slug', 'Slug (если пустое, генерируется реалтайм из имени)'),
+		FormItem::columns()->columns([
+			[
+					FormItem::text('name', 'Имя'),
+					FormItem::image('ico', 'Иконка'),
+					FormItem::checkbox('showadd', 'Показывать в форме добавления рецепта')->defaultValue(0),
+			],
+			[
+					FormItem::text('metakey', 'Meta Keywords'),
+					FormItem::text('metadesk', 'Meta Description'),
+					FormItem::text('slug', 'Slug (если пустое, генерируется реалтайм из имени)')
+			],
+		]),
+	]);
+	return $form;
+})->edit(function ()
+{
+	$form = AdminForm::form();
+	$form->items([
+			FormItem::columns()->columns([
+					[
+							FormItem::text('name', 'Имя'),
+							FormItem::image('ico', 'Иконка'),
+							FormItem::checkbox('showadd', 'Показывать в форме добавления рецепта')->defaultValue(0),
+					],
+					[
+							FormItem::text('metakey', 'Meta Keywords'),
+							FormItem::text('metadesk', 'Meta Description'),
+							FormItem::text('slug', 'Slug (если пустое, генерируется реалтайм из имени)')
+					],
+			]),
 	]);
 	return $form;
 });

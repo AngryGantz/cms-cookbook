@@ -15,6 +15,8 @@ use App\MarkerGroup;
 use App\MarkerCrossPost;
 use App\Models\CmsOption;
 use Image;
+use Input;
+use Validator;
 use Sentinel;
 use Redirect;
 use Session;
@@ -43,19 +45,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->flash();
-        $this->validate($request, [
+        $input = Input::all();
+        $rules = [
             'title' => 'required',
             'text' => 'required',
-        ]);
+        ];
+        $validator = Validator::make($input, $rules);
+        if ($validator->fails())
+        {
+            return Redirect::back()
+                ->withInput()
+                ->withErrors($validator);
+        }
+        $request->flash();
         $fileArrNewImgFilesForSteps = $request->file('imgstep');
         $strArrTextsForSteps =  $request->input('steps');
         $strArrOldImgFileNamesForSteps = $request->input('imgnamestep');
+        $selfmarkers=$request->selfmarkers;
         $arrMarkersForPost = $request->input('recipe-type');
-
+        $arrMarkersForPost = $arrMarkersForPost+$selfmarkers;
+        $arrMarkersForPost= array_merge($arrMarkersForPost,$selfmarkers);
         $arrPrepareSteps = $this->makePrepareSteps($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps);
-
         $post = new Post;
         $post->user_id = Sentinel::check()->getUserId();
         $post->title = $request->input('title');
@@ -72,6 +82,7 @@ class PostController extends Controller
         $post->save(); // save post
         $post->steps()->saveMany($arrPrepareSteps); // save new steps for this post
         $post->setMarkersAttribute($arrMarkersForPost);
+
         // attach markers for post
 //                    $selectmarkers = $request->input('recipe-type');
 //                    foreach ($selectmarkers as $value) {
