@@ -16,7 +16,7 @@
             <img src="{{ URL::to('/imager/fullpath/' . basename($advert['img'])).'/261/261'  }}" alt="banner"/>
         </a>
     @endif
-    @if($advert['title'])
+    @if($advert['text'])
         {!!  $advert['text'] !!}
     @endif
 @endif
