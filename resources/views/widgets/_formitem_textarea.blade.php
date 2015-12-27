@@ -8,7 +8,7 @@
 
 <div class="{!! $errors->has($name) ? 'has-error' : null !!}">
     <label for="{!! $name !!}">{{ $title }}</label>
-    {!! Form::textarea('name', null, array('placeholder' =>  $placeholder )) !!}
+    {!! Form::textarea($name, null, array('placeholder' =>  $placeholder )) !!}
     <p class="help-block">{!! $errors->first($name) !!}</p>
 </div>
 

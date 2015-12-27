@@ -38,5 +38,4 @@
         </div>
     </div>
 </div>
-
 <!--advance search form ends-->

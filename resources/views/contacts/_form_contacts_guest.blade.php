@@ -8,22 +8,24 @@
 
 
 {!! Form::open(array('enctype' => 'multipart/form-data')) !!}
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-    @include('widgets._formitem_text', ['name' => 'name', 'title' => 'Имя*', 'placeholder' => '' ] )
-    @include('widgets._formitem_text', ['name' => 'email', 'title' => 'Email*', 'placeholder' => '' ] )
-    @include('widgets._formitem_textarea', ['name' => 'note', 'title' => 'Сообщение*', 'placeholder' => '' ] )
+    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+
 
     {{--<div class="{!! $errors->has('name') ? 'has-error' : null !!}">--}}
         {{--<label for="name">Имя</label>--}}
-        {{--{!! Form::text('name', null, array('placeholder' => 'Имя*')) !!}--}}
+        {{--{!! Form::text('name', null, array('placeholder' =>  '' )) !!}--}}
         {{--<p class="help-block">{!! $errors->first('name') !!}</p>--}}
     {{--</div>--}}
+
+
+    @include('widgets._formitem_text', ['name' => 'username', 'title' => 'Имя*', 'placeholder' => '' ] )
+    @include('widgets._formitem_text', ['name' => 'email', 'title' => 'Email*', 'placeholder' => '' ] )
+    @include('widgets._formitem_textarea', ['name' => 'note', 'title' => 'Сообщение*', 'placeholder' => '' ] )
 
     <div class="form-group">
         <div class="col-sm-8 col-sm-push-4">
             {!! Form::submit('Отправить', array('class' => 'btn btn-primary')) !!}
         </div>
     </div>
-
 {!! Form::close() !!}

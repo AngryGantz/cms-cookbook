@@ -9,6 +9,8 @@ use App\Models\CmsOption;
 use Mail;
 use Session;
 use Redirect;
+use Input;
+use Validator;
 
 
 class HomeController extends BaseController
@@ -24,72 +26,6 @@ class HomeController extends BaseController
        Session::put('recipies', $recipies);
        $title = CmsOption::getValue('Название сайта');
        return view('home', [ 'recipies' => $recipies, 'title' => $title ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function showRecipie($id)
@@ -150,4 +86,27 @@ class HomeController extends BaseController
     {
         return view('contacts.contacts');
     }
+
+    public function contactsProcess(Request $request)
+    {
+      $this->validate($request, [
+            'email' => 'required|email',
+            'username'  => 'required',
+            'note'  => 'required',
+        ]);
+        $emailTo=CmsOption::getValue('Email для оповещения');
+        $sent = Mail::send('auth.email.callback', compact($request->email, $request->username, $request->note), function($m) use ($emailTo)
+        {
+            $m->from('support@mychefs.ru', 'My Chefs');
+            $m->to($emailTo)->subject('Форма обратной связи');
+        });
+
+        if ($sent === 0)
+        {
+            return Redirect::to('register')
+                ->withErrors('Ошибка отправки письма активации.');
+        }
+        return view('contacts.thanks');
+    }
+
 }
