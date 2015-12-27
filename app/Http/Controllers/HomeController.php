@@ -94,8 +94,11 @@ class HomeController extends BaseController
             'username'  => 'required',
             'note'  => 'required',
         ]);
+        $useremail = $request->email;
+        $username = $request->username;
+        $note = $request->note;
         $emailTo=CmsOption::getValue('Email для оповещения');
-        $sent = Mail::send('auth.email.callback', compact($request->email, $request->username, $request->note), function($m) use ($emailTo)
+        $sent = Mail::send('auth.email.callback', compact('username' , 'useremail', 'note'), function($m) use ($emailTo)
         {
             $m->from('support@mychefs.ru', 'My Chefs');
             $m->to($emailTo)->subject('Форма обратной связи');
