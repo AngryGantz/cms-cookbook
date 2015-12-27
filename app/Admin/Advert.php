@@ -29,7 +29,7 @@ Admin::model('App\Models\Advert')->title('Рекламные блоки')->displ
 		]),
 			FormItem::columns()->columns([
 					[
-							FormItem::select('place', 'Место посадки')->enum(['top1', 'aside1', 'aside2']),
+							FormItem::select('place', 'Место посадки')->enum(['top1', 'aside1', 'aside2', 'foot_script']),
 					],
 					[
 

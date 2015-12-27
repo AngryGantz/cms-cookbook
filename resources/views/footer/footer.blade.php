@@ -58,4 +58,5 @@
         </div>
     </div>
 </div>
+@include('widgets.advert_aside1', [ 'pos' => 'foot_script'])
 <!--footer ends-->
