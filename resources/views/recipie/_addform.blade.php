@@ -97,7 +97,7 @@
 									    <input type="file" name="imgstep[0]" style="display: none;" >
 									</div>
 					    		</div>
-								 <span class="handler-list"><i class="fa fa-arrows"></i></span>
+								 {{--<span class="handler-list"><i class="fa fa-arrows"></i></span>--}}
                     			{!! Form::textarea('steps[0]', null, array('placeholder' => '', 'rows' => '3', 'cols' => '30', 'id' => 'steps1')) !!}
                   				<span class="del-list"><i class="fa fa-trash"></i></span>
 			                </div>
