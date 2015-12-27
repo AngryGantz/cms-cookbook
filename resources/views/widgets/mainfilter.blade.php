@@ -24,9 +24,10 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="inner-advance-search">
-                            @include('widgets._filtergroup_form', ['groupid' => 4, 'numgroup' => 0])
-                            @include('widgets._filtergroup_form', ['groupid' => 2, 'numgroup' => 1])
-                            @include('widgets._filtergroup_form', ['groupid' => 3, 'numgroup' => 2])
+                            @include('widgets._filtergroup_form', ['groupid' => 1, 'numgroup' => 0])
+                            @include('widgets._filtergroup_form', ['groupid' => 4, 'numgroup' => 1])
+                            @include('widgets._filtergroup_form', ['groupid' => 2, 'numgroup' => 2])
+                            @include('widgets._filtergroup_form', ['groupid' => 3, 'numgroup' => 3])
                             <button type="submit">
                                 <i class="fa fa-search"></i>
                             </button>
