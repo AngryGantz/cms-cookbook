@@ -60,6 +60,8 @@
                         @include('widgets.menu_group_markers_list', ['groupid' => 1])
                         @include('widgets.menu_group_markers_list', ['groupid' => 2])
                         @include('widgets.menu_group_markers_list', ['groupid' => 3])
+                        @include('widgets.menu_group_markers_list', ['groupid' => 6])
+                        @include('widgets.menu_group_markers_list', ['groupid' => 5])
                         <li><a href="{{ URL::to('blog/index/') }}">Блог</a>
                             <ul>
                                 <li><a href="{{ URL::to('addblogpost') }}">Добавить статью</a></li>
