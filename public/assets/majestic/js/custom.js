@@ -158,6 +158,11 @@
             $(".about-chef").hide();
             $(".related-recipes").hide();
             $(".recipe-comments").hide();
+            //$(".alinkimgstep").hide();
+            var alinkimgs=$('.alinkimgstep').attr('href');
+            $('.alinkimgstep').attr('href', '');
+            $(".step-image a").href="";
+
 
 
             $(".steps-tabs").slick('unslick');
@@ -167,6 +172,7 @@
             $(".about-chef").show();
             $(".related-recipes").show();
             $(".recipe-comments").show();
+            $('.alinkimgstep').attr('href', alinkimgs);
             e.preventDefault();
         } );
     }
