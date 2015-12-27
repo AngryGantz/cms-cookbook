@@ -316,7 +316,7 @@
             '<div class="add-fields">' +
             '<div class="col-sm-2">' +
                 '<div class="upload">' +
-                    '<div class="file-preview"><br>нажмите для загрузки изображения</div>' +
+                    '<div class="file-preview"><i class="fa fa-picture-o fa-3x"></i></div>' +
                     '<input type="file" name="imgstep[]" style="display: none;">' +
                 '</div>' +
             '</div>'+
