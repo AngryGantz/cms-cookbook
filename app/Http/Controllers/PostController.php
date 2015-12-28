@@ -32,7 +32,7 @@ class PostController extends Controller
     public function addpost()
     {
         // $mgroups = new MarkerGroup;
-        $mgroups = MarkerGroup::all();
+        $mgroups = MarkerGroup::where('showadd','=',1)->get();
         return view('addpost', ['mgroups' => $mgroups]);
     }
     /**

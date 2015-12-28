@@ -20,7 +20,8 @@ Admin::model('App\MarkerGroup')->title('Группы маркеров')->display
 	$form = AdminForm::form();
 	$form->items([
 		FormItem::text('name', 'Имя')->required(),
-		FormItem::text('longname', 'Длинное имя'),
+		FormItem::checkbox('showadd', 'Показывать в форме добавления рецепта'),
+//		FormItem::text('longname', 'Длинное имя'),
 		FormItem::image('ico', 'Иконка'),
 		FormItem::text('metakey', 'Meta Keywords'),
 		FormItem::text('metadesk', 'Meta Description'),

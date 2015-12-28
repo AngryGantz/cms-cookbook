@@ -39,7 +39,7 @@ Admin::model('App\Marker')->title('Маркеры')->display(function ()
 					[
 							FormItem::text('name', 'Имя'),
 							FormItem::image('ico', 'Иконка'),
-							FormItem::checkbox('showadd', 'Показывать в форме добавления рецепта')->defaultValue(0),
+							FormItem::checkbox('showadd', 'Показывать в форме добавления рецепта'),
 					],
 					[
 							FormItem::text('metakey', 'Meta Keywords'),
