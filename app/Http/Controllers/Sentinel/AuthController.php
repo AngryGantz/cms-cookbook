@@ -15,6 +15,7 @@ use Activation;
 use Mail;
 use Reminder;
 use App\User;
+use App\Models\CmsOption;
 
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
@@ -140,25 +141,24 @@ class AuthController extends BaseController {
 		if ($user = Sentinel::register($input))
 		{
 			$activation = Activation::create($user);
-
 			$code = $activation->code;
-
 			$sent = Mail::send('auth.email.activate', compact('user', 'code'), function($m) use ($user)
 			{
-				$m->from('hello@app.com', 'LaravelTest');
+				$m->from('automail@mychefs.ru', 'Кулинарный портал mychefs.ru');
 				$m->to($user->email)->subject('Активация аккаунта');
 			});
-
 			if ($sent === 0)
 			{
 				return Redirect::to('register')
 					->withErrors('Ошибка отправки письма активации.');
 			}
-
+			$emailToAdmin=CmsOption::getValue('Email для оповещения');
+			Mail::send('auth.email.notify_registration', compact('user', 'code'), function($m) use ($user, $emailToAdmin)
+			{
+				$m->from('automail@mychefs.ru', 'Кулинарный портал mychefs.ru');
+				$m->to($emailToAdmin)->subject('mychefs.ru Регистрация нового юзера');
+			});
 			return view('auth.wait');
-			// return Redirect::to('login')
-			// 	->withSuccess('Ваш аккаунт создан, вы сможете войти в систему используя свой логин и пароль ')
-			// 	->with('userId', $user->getUserId());
 		}
 
 		return Redirect::to('register')

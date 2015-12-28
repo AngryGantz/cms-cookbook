@@ -46,11 +46,15 @@ class HomeController extends BaseController
      */
     public function subscribeNews(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'required|email',
+        ]);
         $email = $request->email;
-        $sent = Mail::send('auth.email.subscribenotif', compact('email'), function($m)
+        $emailTo=CmsOption::getValue('Email для оповещения');
+        Mail::send('auth.email.subscribenotif', compact('email'), function($m) use ($emailTo, $email)
         {
-            $m->from('hello@app.com', 'DP CookBook');
-            $m->to('dimkin.pivovarov@gmail.com')->subject('Подписка на новости с DP CookBook');
+            $m->from('automail@mychefs.ru', 'Кулинарный портал mychefs.ru');
+            $m->to($emailTo)->subject('Подписка на новости mychefs.ru');
         });
         return response()->json(['response' => 'Спасибо за подписку', 'guest' => '0']);
     }
@@ -100,7 +104,7 @@ class HomeController extends BaseController
         $emailTo=CmsOption::getValue('Email для оповещения');
         $sent = Mail::send('auth.email.callback', compact('username' , 'useremail', 'note'), function($m) use ($emailTo)
         {
-            $m->from('support@mychefs.ru', 'My Chefs');
+            $m->from('automail@mychefs.ru', 'My Chefs');
             $m->to($emailTo)->subject('Форма обратной связи');
         });
 
