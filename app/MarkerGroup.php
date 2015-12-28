@@ -8,7 +8,7 @@ class MarkerGroup extends Model
 {
     public function markers()
     {
-        return $this->belongsToMany('App\Marker');
+        return $this->belongsToMany('App\Marker')->orderBy('sortorder', 'ASC');
     }
 
 

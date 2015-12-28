@@ -11,7 +11,7 @@
 
 <aside>
     <div class="side-bar">
-        @include('aside._right_menu1', [ 'groupid' => 3])
+        @include('aside._right_menu1', [ 'groupid' => 7])
         @include('aside._right_popularRecipies', [ 'num' => 4])
         @include('widgets.advert_aside1', [ 'pos' => 'aside1'])
         @include('aside._right_measure', [ 'num' => 4])

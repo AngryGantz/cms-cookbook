@@ -14,7 +14,7 @@
 <div class="widget recipe-search">
     <div class="category-list">
         <ul>
-            <?php $MarkerGroup = \App\MarkerGroup::find($groupid)  ?>
+            <?php $MarkerGroup = \App\MarkerGroup::find($groupid);  ?>
             @foreach($MarkerGroup->markers as $marker)
                 <li>
                     <a href="{{ URL::to('/menu/' . $marker->id) }}">{{$marker->name}}</a>
