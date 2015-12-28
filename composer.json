@@ -22,7 +22,8 @@
         "sleeping-owl/with-join": "1.x",
         "rtconner/laravel-tagging": "~2.0",
         "greggilbert/recaptcha": "dev-master",
-        "alexusmai/ruslug": "dev-master"
+        "alexusmai/ruslug": "dev-master",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.27 (LTS) on 2015-12-26.
+ * Generated for Laravel 5.1.27 (LTS) on 2015-12-28.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -14034,6 +14034,38 @@ namespace {
 
 
     class AdvertHelper extends \App\Helpers\AdvertHelper{
+        
+    }
+
+
+    class Recaptcha extends \Greggilbert\Recaptcha\Facades\Recaptcha{
+        
+        /**
+         * Render the recaptcha
+         *
+         * @param array $options
+         * @return \Greggilbert\Recaptcha\view 
+         * @static 
+         */
+        public static function render($options = array()){
+            return \Greggilbert\Recaptcha\Recaptcha::render($options);
+        }
+        
+    }
+
+
+    class Slug extends \Alexusmai\Ruslug\RuslugFacade{
+        
+        /**
+         * 
+         *
+         * @param string $title
+         * @return string 
+         * @static 
+         */
+        public static function make($title){
+            return \Alexusmai\Ruslug\Slug::make($title);
+        }
         
     }
 
