@@ -9,7 +9,11 @@
 <div class="profile">
     <div class="row">
         <div class="col-sm-4">
-            <img src="{{ URL::to('/imager/fullpath/' . basename($user->avatar)).'/250/10000'  }}" alt="">
+            @if($user->avatar)
+                <img src="{{ URL::to('/imager/fullpath/' . basename($user->avatar)).'/250/10000'  }}" alt="">
+            @else
+                <img src="{{ URL::to('/assets/majestic/images/nofoto.png') }}" alt="">
+            @endif
         </div>
         <div class="col-sm-8">
             <h3>{{ $user->first_name }} {{ $user->last_name }}</h3>
