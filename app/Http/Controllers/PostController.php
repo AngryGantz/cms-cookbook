@@ -180,7 +180,7 @@ class PostController extends Controller
         $steps = [];
         foreach ($strArrTextsForSteps as $step) {
             $imgpath = '';
-            if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImage($fileArrNewImgFilesForSteps[$i]); }
+            if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImageFront($fileArrNewImgFilesForSteps[$i]); }
             $steps[] = new Step(['text' => $step, 'img' => $imgpath ]);
             $i = $i+1;
         }
@@ -200,29 +200,8 @@ class PostController extends Controller
         if (strpos($rpath, 'images') and file_exists($rpath)) {
             return $rpath;
         };
-
-
         $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
         $path = public_path('images/useruploads/' . $filename);
-
-        if(file_exists($path))
-        {
-            $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
-            $path = public_path('images/useruploads/' . $filename);
-        }
-
-        if(file_exists($path))
-        {
-            $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
-            $path = public_path('images/useruploads/' . $filename);
-        }
-
-        if(file_exists($path))
-        {
-            $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
-            $path = public_path('images/useruploads/' . $filename);
-        }
-
         Image::make($imgfile->getRealPath())->resize(1000, null, function ($constraint)
         {
             $constraint->aspectRatio();
@@ -230,6 +209,34 @@ class PostController extends Controller
         })->save($path,80);
         return 'images/useruploads/' . $filename;
     }
+
+
+    /**
+     * If $imgfile exist in upload dir, return path to it.
+     * Else make resize to width 1000px, rename file to rnd string (32 simbols), save to
+     * 'images/useruploads/' dir and return path to it
+     * @param $imgfile File
+     * @return string path to img file
+     */
+    protected function saveImageFront($imgfile)
+    {
+
+        $today = getdate();
+        $dt = $today['year'].'-'.$today['mon'].'-'.$today['mday'];
+        $dirname = 'images/useruploads/'. $dt;
+        if(! (file_exists($dirname))) mkdir($dirname, 0775, true);
+        $filename  = $dt . '/' . $imgfile->getClientOriginalName();
+        $path = public_path('images/useruploads/' . $filename);
+        Image::make($imgfile->getRealPath())->resize(1000, null, function ($constraint)
+        {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        })->save($path,80);
+        return 'images/useruploads/' . $filename;
+    }
+
+
+
 
     /**
      * Ajax request to setRating recipie
