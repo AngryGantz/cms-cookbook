@@ -8,8 +8,10 @@ Admin::model('App\Post')->title('')->display(function ()
 
 	]);
 	$display->columns([
+		Column::image('img'),
 		Column::string('title')->label('Заголовок'),
 		Column::string('postStatus.name')->label('Статус'),
+		Column::datetime('created_at')->label('Создан')->format('d.m.Y'),
 
 		// Column::string('note')->label('Note'),
 	]);
