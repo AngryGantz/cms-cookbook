@@ -21,7 +21,7 @@
             </figure>
         </a>
     @endif
-    @if($advert['title'])
+    @if($advert['text'])
         {!!  $advert['text'] !!}
     @endif
 @endif
