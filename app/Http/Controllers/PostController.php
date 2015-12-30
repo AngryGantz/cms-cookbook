@@ -66,7 +66,7 @@ class PostController extends Controller
         if ($selfmarkers)
             $arrMarkersForPost= array_merge($arrMarkersForPost,$selfmarkers);
 
-        $arrPrepareSteps = $this->makePrepareSteps($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps);
+        $arrPrepareSteps = $this->makePrepareStepsFront($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps);
         $post = new Post;
         $post->user_id = Sentinel::check()->getUserId();
         $post->title = $request->input('title');
@@ -156,10 +156,30 @@ class PostController extends Controller
     {
         $i=0;
         $steps = [];
-//        dd($strArrOldImgFileNamesForSteps);
         foreach ($strArrTextsForSteps as $step) {
             $imgpath = '';
             if (isset($strArrOldImgFileNamesForSteps[$i])) $imgpath = $strArrOldImgFileNamesForSteps[$i];
+            if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImage($fileArrNewImgFilesForSteps[$i]); }
+            $steps[] = new Step(['text' => $step, 'img' => $imgpath ]);
+            $i = $i+1;
+        }
+        return $steps;
+    }
+
+
+    /**
+     * Fill array step images
+     * @param $strArrTextsForSteps  array of texts steps for recipie from post form
+     * @param $fileArrNewImgFilesForSteps array of new img files steps for recipie from post form
+     * @param $strArrOldImgFileNamesForSteps array of old img filenames steps for recipie from post form
+     * @return array steps for recipie (ready to save in table)
+     */
+    protected function makePrepareStepsFront($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps)
+    {
+        $i=0;
+        $steps = [];
+        foreach ($strArrTextsForSteps as $step) {
+            $imgpath = '';
             if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImage($fileArrNewImgFilesForSteps[$i]); }
             $steps[] = new Step(['text' => $step, 'img' => $imgpath ]);
             $i = $i+1;
@@ -180,8 +200,29 @@ class PostController extends Controller
         if (strpos($rpath, 'images') and file_exists($rpath)) {
             return $rpath;
         };
+
+
         $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
         $path = public_path('images/useruploads/' . $filename);
+
+        if(file_exists($path))
+        {
+            $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
+            $path = public_path('images/useruploads/' . $filename);
+        }
+
+        if(file_exists($path))
+        {
+            $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
+            $path = public_path('images/useruploads/' . $filename);
+        }
+
+        if(file_exists($path))
+        {
+            $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
+            $path = public_path('images/useruploads/' . $filename);
+        }
+
         Image::make($imgfile->getRealPath())->resize(1000, null, function ($constraint)
         {
             $constraint->aspectRatio();
