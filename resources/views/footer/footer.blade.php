@@ -5,11 +5,9 @@
             <div class="text-center">
                 <a class="logo-footer wow animated zoomIn" href="index.html"><img src="/assets/majestic/images/logo4.png" alt="Logo"/></a>
                 <p class="wow animated flipInX">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                    <br/>
-                    magna aliquyam erat, with an extra ordinary design and quality development features in low
+                    Mychefs.ru – Это книга для записи кулинарных рецептов. Кулинарные рецепты  Вы размещаете сами, делясь своим опытом и секретами с остальными гостями проекта. Способствовать приготовлению вашего шедевра будут удобные рецепты с пошаговым фото.
+                    Приятного аппетита!
                 </p>
-
             </div>
 
             <div class="subs-social-options">
