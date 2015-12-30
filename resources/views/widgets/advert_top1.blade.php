@@ -8,6 +8,7 @@
 
 
 @if( $advert = AdvertHelper::getRandomAdvertByPlace($pos) )
+    <div class="topbanner">
     @if($advert['title'])
         <h4>{{ $advert['title'] }}</h4>
     @endif
@@ -19,4 +20,5 @@
     @if($advert['text'])
         {!!  $advert['text'] !!}
     @endif
+    </div>
 @endif

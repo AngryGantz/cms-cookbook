@@ -6908,3 +6908,10 @@ form div.upload div.file-preview:hover {
     background: #6EBE3B;
   color: white;
 }
+
+@media(min-width: 350px) { .topbanner { width: 320px; height: 100px; } }
+@media(min-width: 500px) { .topbanner { width: 468px; height: 60px; } }
+@media(min-width: 768px) { .topbanner { width: 728px; height: 90px; } }
+
+
+
