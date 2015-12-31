@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-sm-4">
             @if($user->avatar)
-                <img src="{{ URL::to('/imager/fullpath/' . basename($user->avatar)).'/250/10000'  }}" alt="">
+                <img src="{{ URL::to('imgpref/' . $user->avatar).'/250/10000'  }}" alt="">
             @else
                 <img src="{{ URL::to('/assets/majestic/images/nofoto.png') }}" alt="">
             @endif

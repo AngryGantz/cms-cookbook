@@ -17,7 +17,7 @@
         <li>
             <div class="avatar">
                 <a href="{{ URL::to('/user/' . $commentAutor->id ) }}">
-                    <img src="{{ URL::to('/imager/fullpath/' . basename($commentAutor->avatar) . '/83/10000' ) }}" alt="Аватар"/>
+                    <img src="{{ URL::to('imgpref/' . $commentAutor->avatar . '/83/10000' ) }}" alt="Аватар"/>
                 </a>
             </div>
             <div class="comment">

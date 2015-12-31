@@ -153,9 +153,30 @@ Route::post('/addpost', 'PostController@store');
 // });
 
 
+Route::get('imgpref/images/useruploads/{dateimg?}/{filename}/{w?}/{h?}', function($dateimg='', $filename,  $w=150, $h=150){
+	$cacheimage = Image::cache(function($image) use( $dateimg, $filename, $w, $h){
+		$filepath = 'images/useruploads/' . $dateimg .'/'. $filename;
+		if(!file_exists($filepath))
+		{
+			$filepath =  'images/useruploads/' . $dateimg;
+			$h = $w;
+			$w = $filename;
+		}
+		if ($h < 10000) {
+			return $image->make($filepath)->resize($w, $h);
+		} else {
+			return $image->make($filepath)->resize($w, null, function ($constraint)
+			{
+				$constraint->aspectRatio();
+				$constraint->upsize();
+			});
+		}
+	});
+	return Response::make($cacheimage, 200, array('Content-Type' => 'image/jpeg'));
+});
+
+
 Route::get('imager/{pathkey}/{filename}/{w?}/{h?}', function($pathkey, $filename, $w=150, $h=150){
-
-
     $cacheimage = Image::cache(function($image) use($pathkey, $filename, $w, $h){
         switch($pathkey){
             case 'useruploads':

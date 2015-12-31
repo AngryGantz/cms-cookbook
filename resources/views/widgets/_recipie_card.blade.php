@@ -9,7 +9,7 @@
 <div class="listing">
     <div class="image">
         <a href="{{ URL::to('/recipie/' . $recipie->id) }}">
-            <img src="{{ URL::to('/imager/fullpath/' . basename($recipie->img)).'/263/207'  }}" alt="image">
+            <img src="{{ URL::to('imgpref/' . $recipie->img).'/263/207'  }}" alt="image">
         </a>
     </div>
     <div class="detail">

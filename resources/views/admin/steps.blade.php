@@ -20,8 +20,11 @@
 						                <div class="add-fields">
 								    		<div class="col-sm-2">
 								    			<div class="upload">
-												    <div class="file-preview"><img src="{{ URL::to('/imager/fullpath/' . basename($step->img)).'/100/100'  }}" alt=""></div>
-												    <input type="file" name="imgstep[]" style="display: none;" >
+												    {{--<div class="file-preview"><img src="{{ URL::to('/imager/fullpath/' . basename($step->img)).'/100/100'  }}" alt=""></div>--}}
+													<div class="file-preview">
+														<img src="{{ URL::to('imgpref/'.$step->img. '/100/100') }}" alt="">
+													</div>
+													<input type="file" name="imgstep[]" style="display: none;" >
 												</div>
 								    		</div>
 											{{-- <span class="handler-list"><i class="fa fa-arrows"></i></span> --}}

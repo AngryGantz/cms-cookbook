@@ -10,9 +10,9 @@
 <li>
     <div class="step-single">
         <div class="step-image">
-            <a  href="{{ URL::to('/imager/fullpath/' . basename($step->img)).'/1000/10000'  }}"  rel="recipe-slider-1" class="swipebox alinkimgstep" >
+            <a  href="{{ URL::to('imgpref/' . $step->img).'/1000/10000'  }}"  rel="recipe-slider-1" class="swipebox alinkimgstep" >
 
-                <img src="{{ URL::to('/imager/fullpath/' . basename($step->img).'/220/162')  }}"  >
+                <img src="{{ URL::to('imgpref/' . $step->img .'/220/162')  }}"  >
 
             </a>
         </div>

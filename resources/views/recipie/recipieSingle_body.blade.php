@@ -38,7 +38,7 @@
             <div class="slider-recipe-detail">
                 {{-- Recipie image or slider ( TODO uncomment slider and  change some code in slider block ) --}}
                 <div class="wrapper-slider-detail">
-                    <img src="{{ URL::to('/imager/fullpath/' . basename($recipie->img)).'/655/454'  }}" alt="{{ $recipie->title }}">
+                    <img src="{{ URL::to('imgpref/' . $recipie->img).'/655/454'  }}" alt="{{ $recipie->title }}">
                     {{--@include('recipie._recipieSingle_TopSlider')--}}
                 </div>
                 <ul class="recipe-specs">
@@ -118,7 +118,7 @@
             <div class="listing">
                 <div class="image">
                     <div class="image-inner">
-                        <a href="{{ URL::to('/user/' . $autor->id )}}"><img src="{{ URL::to('/imager/fullpath/' . basename($autor->avatar)).'/263/10000'  }}" alt=""></a>
+                        <a href="{{ URL::to('/user/' . $autor->id )}}"><img src="{{ URL::to('imgpref/' . $autor->avatar).'/263/10000'  }}" alt=""></a>
                     </div>
                 </div>
                 <div class="detail">

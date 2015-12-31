@@ -124,7 +124,7 @@
 <label for="avatar" class="col-sm-4 control-label">Аватар</label>
 <div class="col-sm-8">
 <div class="upload">
-    <div class="file-preview"><img src="{{ URL::to('/imager/fullpath/' . basename($user->avatar)).'/100/100'  }}" alt=""><br>нажмите для загрузки</div>
+    <div class="file-preview"><img src="{{ URL::to('imgpref/' . $user->avatar).'/100/100'  }}" alt=""><br>нажмите для загрузки</div>
     <input type="file" name="avatar" style="display: none;" >
 </div>
 </div>

@@ -9,7 +9,7 @@
 
 <article class="post-single">
     <div class="post-visuals">
-            <img src="{{ URL::to('/imager/fullpath/' . basename($blogpost->img)).'/846/341' }}" alt="image"/>
+            <img src="{{ URL::to('imgpref/' . $blogpost->img).'/846/341' }}" alt="image"/>
     </div>
     <div class="post-contents">
         <div class="post-contents-inner">
@@ -73,7 +73,7 @@
             <div class="post-author">
                 <?php $autor = $blogpost->user ?>
                 <div class="avatar">
-                    <a href="{{ URL::to('/user/' . $autor->id )}}"><img src="{{ URL::to('/imager/fullpath/' . basename($autor->avatar)).'/136/10000'  }}" alt="avatar"/></a>
+                    <a href="{{ URL::to('/user/' . $autor->id )}}"><img src="{{ URL::to('imgpref/' . $autor->avatar).'/136/10000'  }}" alt="avatar"/></a>
                 </div>
                 <div class="detail">
                     <ul class="social-icons">

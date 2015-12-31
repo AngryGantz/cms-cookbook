@@ -14,7 +14,7 @@
     @if($advert['img'])
         <a href="{{$advert['imglink']}}">
             <figure>
-                <img src="{{ URL::to('/imager/fullpath/' . basename($advert['img'])).'/261/261'  }}" alt="banner"/>
+                <img src="{{ URL::to('imgpref/' . $advert['img']).'/261/261'  }}" alt="banner"/>
                 @if($advert['title'])
                     <figcaption>{{ $advert['title'] }}</figcaption>
                 @endif

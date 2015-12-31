@@ -19,7 +19,7 @@
                 <li>
                     <a href="{{ URL::to('/menu/' . $marker->id) }}">{{$marker->name}}</a>
                     <div class="list-icons">
-                        <img src="{{ URL::to('/imager/fullpath/' . basename($marker->ico) . '/42/42' ) }}" alt="">
+                        <img src="{{ URL::to('imgpref/' . $marker->ico . '/42/42' ) }}" alt="">
                     </div>
                 </li>
             @endforeach

@@ -13,7 +13,7 @@
             <div class="post-slider">
                 <div>
                     <a href="{{ URL::to('blog/'.$blogpost->id) }}">
-                        <img src="{{ URL::to('/imager/fullpath/' . basename($blogpost->img)).'/846/341' }}" alt="image"/>
+                        <img src="{{ URL::to('imgpref/' . $blogpost->img).'/846/341' }}" alt="image"/>
                     </a>
                 </div>
                 {{--<div>--}}

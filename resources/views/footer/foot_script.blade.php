@@ -144,7 +144,7 @@ function fncaa(idlink){
                  } else {
                      var newCommentsDiv = '<li>' +
                              '<div class="avatar">' +
-                             '<a href="/user/'+ data.userid +'"><img src="/imager/fullpath/'+ data.useravatar +'/83/10000" alt="avatar"/></a>' +
+                             '<a href="/user/'+ data.userid +'"><img src="imgpref/'+ data.useravatar +'/83/10000" alt="avatar"/></a>' +
                              '</div>' +
                              '<div class="comment">' +
                              '<h5><a href="/user/'+ data.userid +'">'+data.username+'</a></h5>' +
@@ -181,7 +181,7 @@ function fncaa(idlink){
                      } else {
                          var newCommentsDiv = '<li>' +
                                  '<div class="avatar">' +
-                                 '<a href="/user/'+ data.userid +'"><img src="/imager/fullpath/'+ data.useravatar +'/83/10000" alt="avatar"/></a>' +
+                                 '<a href="/user/'+ data.userid +'"><img src="imgpref/'+ data.useravatar +'/83/10000" alt="avatar"/></a>' +
                                  '</div>' +
                                  '<div class="comment">' +
                                  '<h5><a href="/user/'+ data.userid +'">'+data.username+'</a></h5>' +

@@ -18,7 +18,7 @@
             <li>
                 <div class="thumb">
                     <a href="{{ URL::to('/recipie/' . $recipie->id) }}">
-                        <img src="{{ URL::to('/imager/fullpath/' . basename($recipie->img)).'/66/59'  }}" alt="thumbnail"/>
+                        <img src="{{ URL::to('imgpref/' . $recipie->img).'/66/59'  }}" alt="thumbnail"/>
                     </a>
                 </div>
                 <div class="detail">
