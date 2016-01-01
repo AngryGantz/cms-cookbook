@@ -103,7 +103,8 @@
                 </ul>
             </div>
             <div class="separator-post"></div>
-
+            @include('widgets.advert_recipie_steps', [ 'pos' => 'recipie_step'])
+            <div class="separator-post"></div>
             {{-- Set rating for recipie --}}
             @include('recipie._setRatingBlock')
             @include ('recipie._onerecipieTagsSocial')
