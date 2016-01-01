@@ -10,8 +10,14 @@
  --}}
 <script src="/assets/majestic/js/wow.js"></script>
 <script src="/assets/majestic/js/custom.js"></script>
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
 
 <script>
+    function fncaa(idlink){
+        $('#'+idlink).trigger('click');
+    }
+
 
     function bindMajesticItem(){
 
@@ -57,9 +63,12 @@
     }
 
 $( document ).ready(function() {
-    $(".file-preview").on('click', function(){
-        $(this).siblings('input[type=file]').trigger('click');
-    });
+//    $(".file-preview").on('click', function(){
+//        $(this).siblings('input[type=file]').trigger('click');
+//    });
+
+
+
 
     $('input[type=file]').on('change' ,function(e) {
         if(typeof FileReader == "undefined") {
@@ -90,5 +99,7 @@ $( document ).ready(function() {
         }   
     });
     bindMajesticItem();
+    $('textarea').ckeditor();
 });
+
 </script>

@@ -35,7 +35,6 @@
 </script>
 <script>
     function fncaa(idlink){
-        console.log('ssssssssssss');
         $('#'+idlink).trigger('click');
     }
 
