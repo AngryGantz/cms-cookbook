@@ -155,7 +155,7 @@ class PostController extends Controller
         foreach ($strArrTextsForSteps as $step) {
             $imgpath = '';
             if (isset($strArrOldImgFileNamesForSteps[$i])) $imgpath = $strArrOldImgFileNamesForSteps[$i];
-            if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImage($fileArrNewImgFilesForSteps[$i]); }
+            if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImageFront($fileArrNewImgFilesForSteps[$i]); }
             $steps[] = new Step(['text' => $step, 'img' => $imgpath ]);
             $i = $i+1;
         }

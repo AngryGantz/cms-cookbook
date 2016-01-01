@@ -45,10 +45,10 @@ Route::get('activate/{id}/{code}', function($id, $code)
 	if ( ! Activation::complete($user, $code))
 	{
 		return Redirect::to("login")
-			->withErrors('Invalid or expired activation code.');
+			->withErrors('Неверный или просроченный код активации.');
 	}
 	return Redirect::to('login')
-		->withSuccess('Account activated.');
+		->withSuccess('Аккаунт активирован.');
 })->where('id', '\d+');
 
 

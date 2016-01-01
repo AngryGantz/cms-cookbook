@@ -75,7 +75,7 @@ class AuthController extends BaseController {
 			$code = $activation->code;
 			$sent = Mail::send('auth.email.activate', compact('user', 'code'), function($m) use ($user)
 			{
-				$m->from('hello@app.com', 'LaravelTest');
+				$m->from('automail@mychefs.ru', 'Кулинарный портал mychefs.ru');
 				$m->to($user->email)->subject('Активация аккаунта');
 			});
 
@@ -208,7 +208,7 @@ class AuthController extends BaseController {
 
 		$sent = Mail::send('auth.email.reminder', compact('user', 'code'), function($m) use ($user)
 		{
-			$m->from('hello@app.com', 'LaravelTest Reset Password');
+			$m->from('automail@mychefs.ru', 'Кулинарный портал mychefs.ru');
 			$m->to($user->email)->subject('Сброс пароля.');
 		});
 
