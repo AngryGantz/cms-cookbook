@@ -82,7 +82,7 @@ class PostController extends Controller
         if (! is_null($request->input('timecook'))) $post->timecook = $request->input('timecook') ;
         $post->metakey = "";
         $post->metadesc = "";
-        if (! is_null($request->file('imgpost'))) $post->img = $this->saveImage($request->file('imgpost'));
+        if (! is_null($request->file('imgpost'))) $post->img = $this->saveImageFront($request->file('imgpost'));
         $post->slug = \Slug::make($post->title);
         $post->save(); // save post
         $post->steps()->saveMany($arrPrepareSteps); // save new steps for this post
