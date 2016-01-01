@@ -197,7 +197,16 @@ class PostController extends Controller
         if (strpos($rpath, 'images') and file_exists($rpath)) {
             return $rpath;
         };
-        $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
+
+//        $filename  = str_random(32) . '.' . $imgfile->getClientOriginalExtension();
+
+        $today = getdate();
+        $dt = $today['year'].'-'.$today['mon'].'-'.$today['mday'];
+        $dirname = 'images/useruploads/'. $dt;
+        if(! (file_exists($dirname))) mkdir($dirname, 0775, true);
+        $filename  = $dt . '/' . $imgfile->getClientOriginalName();
+
+
         $path = public_path('images/useruploads/' . $filename);
         Image::make($imgfile->getRealPath())->resize(1000, null, function ($constraint)
         {
