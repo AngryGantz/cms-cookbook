@@ -126,6 +126,7 @@ class PostController extends Controller
         if (! is_null($request->input('img'))) $post->img = $request->input('img');
         if (! is_null($request->input('metakey'))) $post->metakey = $request->input('metakey');
         if (! is_null($request->input('metadesc'))) $post->metadesc = $request->input('metadesc');
+        if (! is_null($request->input('htmltitle'))) $post->htmltitle = $request->input('htmltitle');
         if ($request->input('slug') == '') {
             $post->slug = \Slug::make($post->title);
         } else {
@@ -155,7 +156,7 @@ class PostController extends Controller
         foreach ($strArrTextsForSteps as $step) {
             $imgpath = '';
             if (isset($strArrOldImgFileNamesForSteps[$i])) $imgpath = $strArrOldImgFileNamesForSteps[$i];
-            if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImageFront($fileArrNewImgFilesForSteps[$i]); }
+            if (! is_null($fileArrNewImgFilesForSteps[$i])) { $imgpath = $this->saveImage($fileArrNewImgFilesForSteps[$i]); }
             $steps[] = new Step(['text' => $step, 'img' => $imgpath ]);
             $i = $i+1;
         }
@@ -343,14 +344,14 @@ class PostController extends Controller
                 if(! isset($recipie)) {
                     $recipie=Post::where('slug', '=', $slug)->first();
                 }
-                $title = $recipie->title  . ' | ' . CmsOption::getValue('Название сайта');
+                $title = $recipie->htmltitle  . ' | ' . CmsOption::getValue('Название сайта');
                 $metaOptions = ['recipie' => $recipie];
                 return view('recipieSingle', [ 'recipie' => $recipie, 'title' => $title, 'metaOptions' => $metaOptions ]);
                 break;
             case 'bymarker':
                 $marker = Session::get('marker');
                 $recipies = Session::get('recipies');
-                $title  = $marker->name . ' | ' . CmsOption::getValue('Название сайта');
+                $title  = $marker->title . ' | ' . CmsOption::getValue('Название сайта');
                 $metaOptions = ['marker' => $marker];
                 return view('recipieGrid', ['recipies' => $recipies, 'title' => $title, 'page_title' => $marker->name, 'metaOptions' => $metaOptions]);
         }

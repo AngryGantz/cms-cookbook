@@ -27,7 +27,8 @@ Admin::model('App\Marker')->title('Маркеры')->display(function ()
 			[
 					FormItem::text('metakey', 'Meta Keywords'),
 					FormItem::text('metadesk', 'Meta Description'),
-					FormItem::text('slug', 'Slug (если пустое, генерируется реалтайм из имени)')
+					FormItem::text('slug', 'Slug (если пустое, генерируется реалтайм из имени)'),
+					FormItem::text('title', 'Title')
 			],
 		]),
 	]);
@@ -46,7 +47,8 @@ Admin::model('App\Marker')->title('Маркеры')->display(function ()
 					[
 							FormItem::text('metakey', 'Meta Keywords'),
 							FormItem::text('metadesk', 'Meta Description'),
-							FormItem::text('slug', 'Slug (если пустое, генерируется реалтайм из имени)')
+							FormItem::text('slug', 'Slug (если пустое, генерируется реалтайм из имени)'),
+							FormItem::text('title', 'Title')
 					],
 			]),
 	]);
