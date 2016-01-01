@@ -7,7 +7,7 @@
 		<meta name="description" content="{{ Meta::getMetaDesc($metaOptions) }}">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
+		<meta name="csrf-token" content="{{ csrf_token() }}" />
 	    <!--google fonts-->
 {{-- 	    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
  --}}

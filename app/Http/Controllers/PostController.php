@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use File;
 use Illuminate\Http\Request;
 use willvincent\Rateable\Rating;
@@ -19,7 +20,7 @@ use Input;
 use Validator;
 use Sentinel;
 use Redirect;
-use Session;
+
 
 
 class PostController extends Controller
@@ -45,6 +46,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        if(! $request->all()){
+            return Redirect::back()
+                ->withErrors("Размер поста превышает предел, установленный в системе. post_max_size = " . ini_get('post_max_size') . " Уменьшите пост или обратитесь к администратору для увеличения лимита");
+        }
+
         $input = Input::all();
         $rules = [
             'title' => 'required',
@@ -65,7 +71,6 @@ class PostController extends Controller
         $arrMarkersForPost = $request->input('recipe-type');
         if ($selfmarkers)
             $arrMarkersForPost= array_merge($arrMarkersForPost,$selfmarkers);
-
         $arrPrepareSteps = $this->makePrepareStepsFront($strArrTextsForSteps, $fileArrNewImgFilesForSteps, $strArrOldImgFileNamesForSteps);
         $post = new Post;
         $post->user_id = Sentinel::check()->getUserId();
@@ -79,18 +84,9 @@ class PostController extends Controller
         $post->metadesc = "";
         if (! is_null($request->file('imgpost'))) $post->img = $this->saveImage($request->file('imgpost'));
         $post->slug = \Slug::make($post->title);
-
         $post->save(); // save post
         $post->steps()->saveMany($arrPrepareSteps); // save new steps for this post
         $post->setMarkersAttribute($arrMarkersForPost);
-
-        // attach markers for post
-//                    $selectmarkers = $request->input('recipe-type');
-//                    foreach ($selectmarkers as $value) {
-//                        if ($value > 0) {
-//                            $post->markers()->attach($value);
-//                        }
-//                    }
         return view('recipie.thanks');
     }
 

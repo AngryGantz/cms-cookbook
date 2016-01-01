@@ -1,6 +1,6 @@
 {{-- {!! Form::open(array('class' => 'form-horizontal')) !!} --}}
 {!! Form::open(array('enctype' => 'multipart/form-data')) !!}
-	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 
 
 
@@ -118,7 +118,7 @@
 			<p class="help-block">{!! $errors->first('steps[0]') !!}</p>
 		</div>
     </fieldset>
-
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="form-group">
 	<div class="col-sm-8 col-sm-push-4">
 		{!! Form::submit('Отправить', array('class' => 'btn btn-primary')) !!}
