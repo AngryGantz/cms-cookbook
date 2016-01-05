@@ -20,7 +20,7 @@ use Input;
 use Validator;
 use Sentinel;
 use Redirect;
-
+use DB;
 
 
 class PostController extends Controller
@@ -258,7 +258,13 @@ class PostController extends Controller
         $rating->rating = $rate;
         if ( Sentinel::check() )
         {
-            $rating->user_id = Sentinel::check()->id;
+            $userid=Sentinel::check()->id;
+            if($ratePresent = DB::table('ratings')->where('rateable_type', '=', 'App\Post')
+                ->where('user_id','=',$userid)
+                ->where('rateable_id','=',$post->id)
+                ->get())
+                    return response()->json(['response' => 'Извините, вы уже голосовали за этот рецепт']);
+            $rating->user_id = $userid;
             $post->ratings()->save($rating);
             return response()->json(['response' => 'Спасибо за ваш голос']);
         } else {
