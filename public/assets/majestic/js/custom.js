@@ -162,6 +162,7 @@
             $(".recipe-steps-print").show();
             $(".ingredients-checkbox").hide();
             $(".ingredients-checkbox-print").show();
+            $(".widget").hide();
 
 
 
@@ -182,6 +183,7 @@
             $(".recipe-steps-print").hide();
             $(".ingredients-checkbox").show();
             $(".ingredients-checkbox-print").hide();
+            $(".widget").show();
             $('.alinkimgstep').attr('href', alinkimgs);
             e.preventDefault();
         } );
