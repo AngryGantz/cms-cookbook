@@ -25,11 +25,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="wrapper-links">
-                                        {{--<ul class="header-social-icons">--}}
-                                            {{--<li><a href="#"><i class="fa fa-facebook"></i></a></li>--}}
-                                            {{--<li><a href="#"><i class="fa fa-twitter"></i></a></li>--}}
-                                            {{--<li><a href="#"><i class="fa fa-google-plus"></i></a></li>--}}
-                                        {{--</ul>--}}
+                                        <ul class="header-social-icons">
+                                            <li><a href="{!! route('socialite.auth', 'facebook') !!}"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="{!! route('socialite.auth', 'twitter') !!}"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="{!! route('socialite.auth', 'vkontakte') !!}"><i class="fa fa-vk"></i></a></li>
+                                        </ul>
 	                                    <span class="sign-in-buttons">
 	                                    	@if ( ! Sentinel::check())
 		                                        <a class="login" href="{{ URL::to('login') }}">Вход</a>

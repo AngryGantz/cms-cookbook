@@ -15,7 +15,8 @@ return [
 	/*
 	 * Middleware to use in admin routes
 	 */
-	'middleware'              => ['admin.auth'],
+//	'middleware'              => ['admin.auth'],
+	'middleware'              => ['isadmin'],
 
 	/*
 	 * Path to admin bootstrap files directory
@@ -31,13 +32,24 @@ return [
 	/*
 	 * Authentication config
 	 */
-	'auth'                    => [
-		'model' => '\SleepingOwl\AdminAuth\Entities\Administrator',
+//	'auth'                    => [
+//		'model' => '\SleepingOwl\AdminAuth\Entities\Administrator',
+//		'rules' => [
+//			'username' => 'required',
+//			'password' => 'required',
+//		]
+//	],
+
+	'auth' => [
+		'model' => \Cartalyst\Sentinel\Users\EloquentUser::class,
 		'rules' => [
-			'username' => 'required',
+			'email' => 'required',
 			'password' => 'required',
 		]
 	],
+
+
+
 
 	/*
 	 * Template to use

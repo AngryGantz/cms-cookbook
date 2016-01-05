@@ -20,8 +20,8 @@
 {{-- BlogPost Image  --}}
 <div class="upload">
     <label for="imgpost">Изображение</label>
-    <div class="file-preview"><i class="fa fa-picture-o fa-3x"></i></div>
-    <input type="file" name="imgpost" style="display: none;" >
+    <div class="file-preview" onclick="fncaa('avatarimg');"><i class="fa fa-picture-o fa-3x"></i></div>
+    <input id="avatarimg" type="file" name="imgpost" style="display: none;" >
 </div>
 <br>
 

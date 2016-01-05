@@ -9,11 +9,7 @@
 <div class="profile">
     <div class="row">
         <div class="col-sm-4">
-            @if($user->avatar)
-                <img src="{{ URL::to('imgpref/' . $user->avatar).'/250/10000'  }}" alt="">
-            @else
-                <img src="{{ URL::to('/assets/majestic/images/nofoto.png') }}" alt="">
-            @endif
+            <img src="{{ URL::to(ImgHelper::getAvatar($user->id, 250, 10000)) }}" alt="Аватар"/>
         </div>
         <div class="col-sm-8">
             <h3>{{ $user->first_name }} {{ $user->last_name }}</h3>

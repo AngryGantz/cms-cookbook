@@ -124,8 +124,16 @@
 <label for="avatar" class="col-sm-4 control-label">Аватар</label>
 <div class="col-sm-8">
 <div class="upload">
-    <div class="file-preview"><img src="{{ URL::to('imgpref/' . $user->avatar).'/100/100'  }}" alt=""><br>нажмите для загрузки</div>
-    <input type="file" name="avatar" style="display: none;" >
+
+    @if(ImgHelper::isAvatar($user->id))
+        <div class="file-preview hasimg" onclick="fncaa('avatarimg');"><img src="{{ URL::to(ImgHelper::getAvatar($user->id, 98, 100)) }}" alt=""></div>
+        <input id="avatarimg" type="file" name="avatar" style="display: none;" >
+    @else
+        <div class="file-preview" onclick="fncaa('avatarimg');"><i class="fa fa-picture-o fa-3x"></i></div>
+        <input id="avatarimg" type="file" name="avatar" style="display: none;" >
+    @endif
+
+
 </div>
 </div>
 <br><br><br><br><br><br>

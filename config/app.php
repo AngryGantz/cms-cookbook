@@ -152,6 +152,24 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
         Alexusmai\Ruslug\RuslugServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
+
+        /**
+         * Forms & HTML builders
+         *
+         * @link https://laravelcollective.com/docs/5.2/html  Homepage Forms & HTML
+         */
+        Collective\Html\HtmlServiceProvider::class,
+
+        /**
+         * Curl for Laravel
+         *
+         * @link http://packalyst.com/packages/package/vinelab/http  page on lara pacckage
+         */
+        Vinelab\Http\HttpServiceProvider::class,
+
+
+
 
         /*
          * Application Service Providers...
@@ -161,6 +179,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Conner\Tagging\Providers\TaggingServiceProvider::class,
+
+
+
+
+
         /*
          * my providers
          */
@@ -229,10 +252,21 @@ return [
         'FormItem'      => SleepingOwl\Admin\FormItems\FormItem::class,
         'Image'         => Intervention\Image\Facades\Image::class,
         'Debugbar'      => Barryvdh\Debugbar\Facade::class,
+
         'Meta'          => App\Helpers\Meta::class,
         'AdvertHelper'        => App\Helpers\AdvertHelper::class,
+        'ImgHelper'     => App\Helpers\ImgHelper::class,
+
         'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
         'Slug' => Alexusmai\Ruslug\RuslugFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        /**
+         * Curl for Laravel
+         *
+         * @link http://packalyst.com/packages/package/vinelab/http  page on lara pacckage
+         */
+        'CurlHttp' => Vinelab\Http\Facades\Client::class,
 
     ],
 

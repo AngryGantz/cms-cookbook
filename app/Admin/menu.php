@@ -5,11 +5,20 @@ Admin::menu(\App\Post::class)->label('Рецепты')->icon('fa-book');
 Admin::menu(\App\Models\PostStatus::class)->label('Статусы поста')->icon('fa-bookmark-o');
 Admin::menu(\App\Marker::class)->icon('fa-paperclip');
 Admin::menu(\App\MarkerGroup::class)->icon('fa-list-ul');
-Admin::menu(\App\User::class)->label('Пользователи')->icon('fa-user');
+
 Admin::menu(Lanz\Commentable\Comment::class)->label('Комментарии')->icon('fa-comments-o');
 Admin::menu(\App\Models\BlogPost::class)->label('Статьи блога')->icon('fa-file-powerpoint-o');
 Admin::menu(\App\Models\Advert::class)->label('Рекламные блоки')->icon('fa-eye');
 Admin::menu(\App\Models\CmsOption::class)->label('Общие настройки')->icon('fa-cogs');
+
+
+Admin::menu()->label('Пользователи')->icon('fa-users')->items(function ()
+{
+    Admin::menu(Cartalyst\Sentinel\Users\EloquentUser::class)->label('Юзеры')->icon('fa-user');
+    Admin::menu(App\Permit::class)->label('Права')->icon('fa-key');
+    Admin::menu(App\Role::class)->label('Роли')->icon('fa-graduation-cap');
+
+});
 
 
 

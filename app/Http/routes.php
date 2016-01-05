@@ -19,139 +19,25 @@
 // Home Page route
 Route::get('/', 'HomeController@index');
 
+Route::get('register', 'AuthController@register');
+Route::post('register', 'AuthController@registerProcess');
+Route::get('activate/{id}/{code}', 'AuthController@activate');
+Route::get('login', 'AuthController@login');
+Route::post('login', 'AuthController@loginProcess');
+Route::get('logout', 'AuthController@logoutuser');
 
-/**
- *  Routes for Autorization/Registration users
- */
-
-// show login page
-Route::get('/login', 'Sentinel\AuthController@login');
-// post login data from login form route
-Route::post('/login', 'Sentinel\AuthController@processLogin');
-
-// logout
-Route::get('/logout', 'Sentinel\AuthController@logout');
-
-// show register page
-Route::get('/register', 'Sentinel\AuthController@register');
-
-// post register data from register form route
-Route::post('/register', 'Sentinel\AuthController@processRegister');
-
-//  Activate account by link in Email
-Route::get('activate/{id}/{code}', function($id, $code)
-{
-	$user = Sentinel::findById($id);
-	if ( ! Activation::complete($user, $code))
-	{
-		return Redirect::to("login")
-			->withErrors('Неверный или просроченный код активации.');
-	}
-	return Redirect::to('login')
-		->withSuccess('Аккаунт активирован.');
-})->where('id', '\d+');
-
-
-//  Page with message about Email with link to reset password
-Route::get('/wait', 'Sentinel\AuthController@wait');
-
-
-/**
- *  Routes for Reset password
- */
-
-// Show page for begin process reset password
-Route::get('/reset', 'Sentinel\AuthController@reset');
-
-// Submit user for reset password
-Route::post('/reset', 'Sentinel\AuthController@resetProcess');
-
-Route::get('reset/{id}/{code}', function($id, $code)
-{
-	$user = Sentinel::findById($id);
-
-	return View::make('auth.completeReset');
-
-})->where('id', '\d+');
-
-Route::post('reset/{id}/{code}', function($id, $code)
-{
-	$rules = [
-		'password' => 'required|confirmed',
-	];
-
-	$validator = Validator::make(Input::get(), $rules);
-
-	if ($validator->fails())
-	{
-		return Redirect::back()
-			->withInput()
-			->withErrors($validator);
-	}
-
-	$user = Sentinel::findById($id);
-
-	if ( ! $user)
-	{
-		return Redirect::back()
-			->withInput()
-			->withErrors('Пользователя не существует.');
-	}
-
-	if ( ! Reminder::complete($user, $code, Input::get('password')))
-	{
-		return Redirect::to('login')
-			->withErrors('Неправильный или просроченный код сброса.');
-	}
-
-	return Redirect::to('login')
-		->withSuccess("Пароль сброшен.");
-})->where('id', '\d+');
-
-Route::get('reactivate', function()
-{
-	if ( ! $user = Sentinel::check())
-	{
-		return Redirect::to('login');
-	}
-
-	$activation = Activation::exists($user) ?: Activation::create($user);
-
-	// This is used for the demo, usually you would want
-	// to activate the account through the link you
-	// receive in the activation email
-	Activation::complete($user, $activation->code);
-
-	// $code = $activation->code;
-
-	// $sent = Mail::send('sentinel.emails.activate', compact('user', 'code'), function($m) use ($user)
-	// {
-	// 	$m->to($user->email)->subject('Activate Your Account');
-	// });
-
-	// if ($sent === 0)
-	// {
-	// 	return Redirect::to('register')
-	// 		->withErrors('Failed to send activation email.');
-	// }
-
-	return Redirect::to('account')
-			->withSuccess('Account activated.');
-})->where('id', '\d+');
+Route::get('reset', 'AuthController@resetOrder');
+Route::post('reset', 'AuthController@resetOrderProcess');
+Route::get('reset/{id}/{code}', 'AuthController@resetComplete');
+Route::post('reset/{id}/{code}', 'AuthController@resetCompleteProcess');
+Route::get('wait', 'AuthController@wait');
 
 
 
 // Add post from front-end
 Route::get('/addpost', 'PostController@addpost');
-
 // Add post from front-end
 Route::post('/addpost', 'PostController@store');
-
-
-// Route::post('/addpost', function () {
-//   return dd(Input::all());
-// });
-
 
 Route::get('imgpref/images/useruploads/{dateimg?}/{filename}/{w?}/{h?}', function($dateimg='', $filename,  $w=150, $h=150){
 	$cacheimage = Image::cache(function($image) use( $dateimg, $filename, $w, $h){
@@ -175,6 +61,21 @@ Route::get('imgpref/images/useruploads/{dateimg?}/{filename}/{w?}/{h?}', functio
 	return Response::make($cacheimage, 200, array('Content-Type' => 'image/jpeg'));
 });
 
+Route::get('storage/app/avatars/{filename}/{w?}/{h?}', function( $filename,  $w=150, $h=150){
+	$cacheimage = Image::cache(function($image) use( $filename, $w, $h){
+		$filepath = storage_path() . '/app/avatars/' . $filename;
+		if ($h < 10000) {
+			return $image->make($filepath)->resize($w, $h);
+		} else {
+			return $image->make($filepath)->resize($w, null, function ($constraint)
+			{
+				$constraint->aspectRatio();
+				$constraint->upsize();
+			});
+		}
+	});
+	return Response::make($cacheimage, 200, array('Content-Type' => 'image/jpeg'));
+});
 
 Route::get('imager/{pathkey}/{filename}/{w?}/{h?}', function($pathkey, $filename, $w=150, $h=150){
     $cacheimage = Image::cache(function($image) use($pathkey, $filename, $w, $h){
@@ -196,7 +97,6 @@ Route::get('imager/{pathkey}/{filename}/{w?}/{h?}', function($pathkey, $filename
 			});
 		}
     });
-
     return Response::make($cacheimage, 200, array('Content-Type' => 'image/jpeg'));
 });
 
@@ -239,3 +139,16 @@ Route::get('blog/tags/{slug}', 'BlogPostController@showByTag');
  */
 Route::get('contacts', 'HomeController@contacts');
 Route::post('contacts', 'HomeController@contactsProcess');
+
+/**
+ * Route for social auth
+ */
+Route::get('/socialite/{provider}',
+		[
+				'as' => 'socialite.auth',
+				function ( $provider ) {
+					return \Socialite::driver( $provider )->redirect();
+				}
+		]
+);
+Route::get('/socialite/{provider}/callback', 'SocialController@supervisor');
