@@ -158,20 +158,30 @@
             $(".about-chef").hide();
             $(".related-recipes").hide();
             $(".recipe-comments").hide();
+            $(".recipe-steps").hide();
+            $(".recipe-steps-print").show();
+            $(".ingredients-checkbox").hide();
+            $(".ingredients-checkbox-print").show();
+
+
+
             //$(".alinkimgstep").hide();
             var alinkimgs=$('.alinkimgstep').attr('href');
             $('.alinkimgstep').attr('href', '');
             $(".step-image a").href="";
 
-
-
             $(".steps-tabs").slick('unslick');
             $(".steps-detail").slick('unslick');
+
             window.print();
             $(".slider-recipe-detail").show();
+            $(".recipe-steps").show();
             $(".about-chef").show();
             $(".related-recipes").show();
             $(".recipe-comments").show();
+            $(".recipe-steps-print").hide();
+            $(".ingredients-checkbox").show();
+            $(".ingredients-checkbox-print").hide();
             $('.alinkimgstep').attr('href', alinkimgs);
             e.preventDefault();
         } );

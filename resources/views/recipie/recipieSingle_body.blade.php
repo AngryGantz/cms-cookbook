@@ -91,6 +91,16 @@
                 </div>
             </div>
 
+            {{-- Recipie ingridients for print--}}
+            <div class="ingredients-checkbox-print" style="display:none;">
+                <div>
+                    <h3>Ингредиенты</h3>
+                    {!! $recipie->note !!}
+                </div>
+            </div>
+
+
+
             {{-- Recipie steps --}}
             <div class="recipe-steps">
                 <h3 class="lined">Этапы приготовления</h3>
@@ -102,6 +112,21 @@
                     @endforeach
                 </ul>
             </div>
+
+            {{-- Recipie steps for print --}}
+            <div class="recipe-steps-print" style="display: none;">
+                <h3 class="lined">Этапы приготовления</h3>
+                <ul class="steps-list">
+                    <?php $i=1 ?>
+                    @foreach ($recipie->steps as $step)
+                        @include ('recipie._onerecipieStepPrint',[ 'count' => $i ])
+                        <?php $i++ ?>
+                    @endforeach
+                </ul>
+            </div>
+
+
+
             <div class="separator-post"></div>
             @include('widgets.advert_recipie_steps', [ 'pos' => 'recipie_step'])
             <div class="separator-post"></div>
