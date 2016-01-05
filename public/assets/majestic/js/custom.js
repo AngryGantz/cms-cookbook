@@ -184,7 +184,9 @@
             $(".ingredients-checkbox").show();
             $(".ingredients-checkbox-print").hide();
             $(".widget").show();
+
             $('.alinkimgstep').attr('href', alinkimgs);
+
             e.preventDefault();
         } );
     }
