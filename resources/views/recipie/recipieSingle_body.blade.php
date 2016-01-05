@@ -86,7 +86,7 @@
             {{-- Recipie ingridients --}}
             <div class="ingredients-checkbox">
                 <div class="ingredients">
-                    <h3>Ингридиенты</h3>
+                    <h3>Ингредиенты</h3>
                     {!! $recipie->note !!}
                 </div>
             </div>

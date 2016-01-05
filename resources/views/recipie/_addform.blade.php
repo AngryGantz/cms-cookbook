@@ -67,7 +67,7 @@
 
 	{{-- Short note --}}
 	<div class="{!! $errors->has('note') ? 'has-error' : null !!}">
-		<label for="note">Ингридиенты</label>
+		<label for="note">Ингредиенты</label>
 		{!! Form::textarea('note', null, array('placeholder' => '', 'rows' => '8')) !!}
 		<p class="help-block">{!! $errors->first('note') !!}</p>
 	</div>

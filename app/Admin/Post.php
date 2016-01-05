@@ -41,7 +41,7 @@ Admin::model('App\Post')->title('')->display(function ()
 						],
 					]),
 						FormItem::multiselect('markers', 'Маркеры')->model('App\Marker')->display('name'),
-						FormItem::ckeditor('note', 'Ингридиенты'),
+						FormItem::ckeditor('note', 'Ингредиенты'),
 						FormItem::ckeditor('text', 'Описание'),
 			],
 			'Этапы приготовления' => [
@@ -85,7 +85,7 @@ Admin::model('App\Post')->title('')->display(function ()
 							],
 					]),
 					FormItem::multiselect('markers', 'Маркеры')->model('App\Marker')->display('name'),
-					FormItem::ckeditor('note', 'Ингридиенты'),
+					FormItem::ckeditor('note', 'Ингредиенты'),
 					FormItem::ckeditor('text', 'Описание'),
 			],
 			'Этапы приготовления' => [
