@@ -24,7 +24,7 @@
     <input id="avatarimg" type="file" name="imgpost" style="display: none;" >
 </div>
 <br>
-
+{{-- 85.143.221.41 --}}
 {{-- Text --}}
 <div class="{!! $errors->has('text') ? ' has-error' : null !!}">
     <label for="text">Статья</label>
