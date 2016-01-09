@@ -17,7 +17,7 @@
     </div>
 
     <div class="recipe-set">
-        <h2>Топ рецептов по просмотру</h2>
+        <h2>Топ рецептов по просмотрам</h2>
         <div class="boxed-recipes text-center">
             @include('widgets.recipiescard_list', ['animate' => 'yes', 'recipies' => RecipieHelper::getPopularRecipies(6), 'type' => 'view'] )
         </div>
