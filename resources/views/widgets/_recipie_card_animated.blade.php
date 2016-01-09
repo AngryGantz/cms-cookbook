@@ -20,7 +20,16 @@
                 </a>
             </h3>
             <div class="short-separator"></div>
-            @include('widgets._ratingBox')
+            @if($type=='rating') @include('widgets._ratingBox') @endif
+            @if($type=='view')
+               Просмотров: {{ $recipie->views  }}
+            @endif
+            @if($type=='calendar')
+                <ul class="post-meta">
+                    <li class="calendar">{{ $recipie->created_at->format('d/m/Y') }}</li>
+                </ul>
+            @endif
+
         </div>
     </div>
 </div>

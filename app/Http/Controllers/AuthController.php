@@ -67,6 +67,7 @@ class AuthController extends Controller
             $this->validate($request, [
                 'email' => 'required|email',
                 'password' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha',
             ]);
             $remember = (bool) $request->remember;
             if (Sentinel::authenticate($request->all(), $remember))
@@ -121,6 +122,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'password_confirm' => 'required|same:password',
+            'g-recaptcha-response' => 'required|recaptcha',
         ]);
         $input = $request->all();
         $credentials = [ 'email' => $request->email ];

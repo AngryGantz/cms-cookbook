@@ -167,6 +167,17 @@ class Post extends Model
     }
 
     /**
+     * Get $num recipies with max views
+     *
+     * @param $num
+     * @return mixed
+     */
+    public static function getRatingRecipies($num) {
+        return  DB::table('posts')->where('postStatus_id','=', 3)->orderBy('avrating', 'desc')->take($num)->get();
+    }
+
+
+    /**
      *  Get last $num recipies
      *
      * @param $num

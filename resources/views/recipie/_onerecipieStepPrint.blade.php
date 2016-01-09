@@ -19,5 +19,6 @@
             </p>
         </div>
     </div>
+    <div class="clear"></div>
 </li>
 

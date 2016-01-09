@@ -256,6 +256,7 @@ return [
         'Meta'          => App\Helpers\Meta::class,
         'AdvertHelper'        => App\Helpers\AdvertHelper::class,
         'ImgHelper'     => App\Helpers\ImgHelper::class,
+        'RecipieHelper' => App\Helpers\RecipieHelper::class,
 
         'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
         'Slug' => Alexusmai\Ruslug\RuslugFacade::class,

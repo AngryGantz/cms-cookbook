@@ -177,7 +177,7 @@
             <h3 class="lined">Похожие рецепты</h3>
             <div class="boxed-recipes text-center">
                 @if ($recipies = $recipie->getRelatedRecipies(3))
-                    @include('widgets.recipiescard_list', ['animate' => 'yes'])
+                    @include('widgets.recipiescard_list', ['animate' => 'yes', 'type' => 'rating'])
                 @endif
             </div>
         </div>

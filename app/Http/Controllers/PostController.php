@@ -266,6 +266,8 @@ class PostController extends Controller
                     return response()->json(['response' => 'Извините, вы уже голосовали за этот рецепт']);
             $rating->user_id = $userid;
             $post->ratings()->save($rating);
+            $post->avrating = $post->averageRating;
+            $post->save();
             return response()->json(['response' => 'Спасибо за ваш голос']);
         } else {
             return response()->json(['response' => 'Извините, гости голосовать не могут']);

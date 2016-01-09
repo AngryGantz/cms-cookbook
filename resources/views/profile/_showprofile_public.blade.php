@@ -59,7 +59,7 @@
         <h4>Опубликованные рецепты</h4>
         <?php $recipies = $user->posts ?>
         <div class="boxed-recipes text-center">
-            @include('widgets.recipiescard_list', ['animate' => 'yes'])
+            @include('widgets.recipiescard_list', ['animate' => 'yes', 'type' => 'rating'] )
         </div>
     </div>
 

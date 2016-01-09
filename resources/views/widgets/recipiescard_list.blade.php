@@ -12,8 +12,10 @@
 
 {{--<div class="boxed-recipes text-center">--}}
 @foreach($recipies as $recipie)
-    @if ($animate == "yes")  @include('widgets._recipie_card_animated')
-        @else  @include('widgets._recipie_card')
+    @if ($animate == "yes")
+        @include('widgets._recipie_card_animated')
+    @else
+        @include('widgets._recipie_card')
     @endif
 @endforeach
 {{--</div>--}}

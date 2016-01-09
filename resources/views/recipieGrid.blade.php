@@ -22,7 +22,7 @@
             <div class="col-md-8 col-lg-9">
                 <div class="recipe-set">
                     <div class="recipe-listing listing-grid">
-                        @include('widgets.recipiescard_list', ['animate' => 'no'])
+                        @include('widgets.recipiescard_list', ['animate' => 'no', 'type' => 'calendar'])
                     </div>
                </div>
             </div>
