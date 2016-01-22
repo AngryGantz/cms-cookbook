@@ -338,7 +338,7 @@ class PostController extends Controller
 
 
     public function showRecipiesByMarkerBySlug($slug) {
-        if(! $marker = Marker::where('slug', '=', $slug)->first())
+        if($marker = Marker::where('slug', '=', $slug)->first())
         {
             $recipies = $marker->recipies;
             $recipies = $recipies->filter(function ($item) {
