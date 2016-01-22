@@ -1,2 +1,12 @@
 User-agent: *
 Disallow:
+Disallow: /addpost
+Disallow: /admin
+Disallow: /user
+Disallow: /user/
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /reset
+Disallow: /contacts
+Disallow: /addblogpost
