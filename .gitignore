@@ -2,6 +2,7 @@
 /node_modules
 /.idea
 /public/images/useruploads
+/public/sitemap.xml
 Homestead.yaml
 Homestead.json
 .env
