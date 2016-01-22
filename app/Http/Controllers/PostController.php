@@ -336,6 +336,30 @@ class PostController extends Controller
 
     }
 
+
+    public function showRecipiesByMarkerBySlug($slug) {
+        if(! $marker = Marker::where('slug', '=', $slug)->first())
+        {
+            $recipies = $marker->recipies;
+            $recipies = $recipies->filter(function ($item) {
+                return $item->postStatus_id == 3 ;
+            });
+            $title = CmsOption::getValue('Название сайта') . ' | '. $marker->name;
+            $metaOptions = ['marker' => $marker];
+            Session::put('recipies', $recipies);
+            Session::put('marker', $marker);
+            Session::put('typepage', 'bymarker');
+            if($marker->slug == '') $markerslug = \Slug::make($marker->name);
+            else $markerslug = $marker->slug;
+            return view('recipieGrid', ['recipies' => $recipies, 'title' => $title, 'page_title' => $marker->name, 'metaOptions' => $metaOptions]);
+        }
+    }
+
+
+
+
+
+
     public function subscribeNews()
     {
         dd('sdsdsd');
