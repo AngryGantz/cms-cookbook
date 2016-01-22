@@ -51,7 +51,7 @@ class Meta {
         if (isset($metaOptions['marker'])) $mk = $mk.','.$metaOptions['marker']->metadesc;
         if (isset($metaOptions['recipie'])) {
             foreach($metaOptions['recipie']->markers as $marker) {
-                $mk = $mk.','.$marker->metadesc;
+                $mk = $mk.','.$marker->metadesk;
             }
             $mk = $mk.','.$metaOptions['recipie']->metadesc;
         }
@@ -59,7 +59,7 @@ class Meta {
             foreach($metaOptions['filter'] as $idMarker) {
                 If($idMarker>0) {
                     $marker=Marker::find($idMarker);
-                    if($marker->metadesc != '') $mk = $mk.','.$marker->metadesc;
+                    if($marker->metadesk != '') $mk = $mk.','.$marker->metadesk;
                 }
             }
         }
