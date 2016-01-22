@@ -39,11 +39,24 @@ class SitemapsController extends BaseController
 
         $markers = Marker::all();
         foreach ($markers as $marker) {
-            Sitemap::addTag(route('post.showbymarker', $marker->id), $marker->updated_at, 'daily', '0.8');
+            Sitemap::addTag(route('post.showbymarker', $marker->id), $marker->updated_at, 'daily', '0.6');
+            Sitemap::addTag(route('post.showbymarkerslug', $marker->slug), $marker->updated_at, 'daily', '0.7');
         }
 
         Storage::put('sitemap.xml', Sitemap::render());
         copy(storage_path('app/sitemap.xml'), public_path('sitemap.xml'));
         return Sitemap::render();
     }
+
+    public function generateMarkerSlug()
+        {
+            $markers = Marker::all();
+            foreach($markers as $marker)
+            {
+                $marker->slug = \Slug::make($marker->name);
+                $marker->save();
+            }
+
+        }
+
 }

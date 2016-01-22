@@ -113,9 +113,10 @@ Route::post('/addcomment/{id}', 'PostController@addComment');
 
 Route::get('/menu/{id}', [ 'as' => 'post.showbymarker', 'uses' => 'PostController@showRecipiesByMarker']);
 //Route::get('/menu/{id}', 'PostController@showRecipiesByMarker');
-Route::get('/menus/{slug}', [ 'as' => 'post.showbymarker', 'uses' => 'PostController@showRecipiesByMarkerBySlug']);
+Route::get('/menus/{slug}', [ 'as' => 'post.showbymarkerslug', 'uses' => 'PostController@showRecipiesByMarkerBySlug']);
 //Route::get('/menu/{id}', 'PostController@showRecipiesByMarker');
 
+Route::get('/generatemarkerslug', [ 'as' => 'post.generatemarkerslug', 'uses' => 'SitemapsController@generateMarkerSlug']);
 
 
 Route::post('subsnews', 'HomeController@subscribeNews');
