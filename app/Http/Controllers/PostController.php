@@ -23,6 +23,7 @@ use Redirect;
 use DB;
 
 
+
 class PostController extends Controller
 {
     /**

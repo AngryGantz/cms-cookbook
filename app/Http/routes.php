@@ -111,7 +111,9 @@ Route::get('/setratingpost/{rate}/{id}', 'PostController@setRating');
 
 Route::post('/addcomment/{id}', 'PostController@addComment');
 
-Route::get('/menu/{id}', 'PostController@showRecipiesByMarker');
+Route::get('/menu/{id}', [ 'as' => 'post.showbymarker', 'uses' => 'PostController@showRecipiesByMarker']);
+//Route::get('/menu/{id}', 'PostController@showRecipiesByMarker');
+
 
 Route::post('subsnews', 'HomeController@subscribeNews');
 
