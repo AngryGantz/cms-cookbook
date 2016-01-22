@@ -117,7 +117,9 @@ Route::post('subsnews', 'HomeController@subscribeNews');
 
 Route::post('/filter', 'HomeController@filterRecipies');
 
-Route::get('/recipies/{slug}', 'PostController@showRecipieUrlWithSlug');
+//Route::get('/recipies/{slug}', 'PostController@showRecipieUrlWithSlug');
+
+Route::get('/recipies/{slug}', [ 'as' => 'post.showslug', 'uses' => 'PostController@showRecipieUrlWithSlug']);
 
 /**
  *
@@ -152,3 +154,15 @@ Route::get('/socialite/{provider}',
 		]
 );
 Route::get('/socialite/{provider}/callback', 'SocialController@supervisor');
+
+Route::get('sitemap', 'SitemapsController@posts');
+
+Route::get('recip/{post}',[ 'as' => 'post.show',  function(App\Post $post)
+{
+	$title = $post->htmltitle  . ' | ' . App\Models\CmsOption::getValue('Название сайта');
+	$metaOptions = ['recipie' => $post];
+	return view('recipieSingle', [ 'recipie' => $post, 'title' => $title, 'metaOptions' => $metaOptions ]);
+}
+	]
+);
+

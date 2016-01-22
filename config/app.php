@@ -153,6 +153,7 @@ return [
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
         Alexusmai\Ruslug\RuslugServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
+        Watson\Sitemap\SitemapServiceProvider::class,
 
         /**
          * Forms & HTML builders
@@ -268,6 +269,8 @@ return [
          * @link http://packalyst.com/packages/package/vinelab/http  page on lara pacckage
          */
         'CurlHttp' => Vinelab\Http\Facades\Client::class,
+        'Sitemap' => Watson\Sitemap\Facades\Sitemap::class,
+
 
     ],
 
